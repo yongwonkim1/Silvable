@@ -135,6 +135,7 @@ android {
 
     defaultConfig {
         applicationId "com.sinabeuro"
+        vectorDrawables.useSupportLibrary = true
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
