@@ -111,9 +111,8 @@ const styles = StyleSheet.create({
       height: 5
     },
     shadowOpacity: 0.5,
-    shadowRadius: 5
-
-
+    shadowRadius: 5,
+    elevation: 20,  // 안드로이드용 그림자
   },
   eleImg: {
     height: 50,
