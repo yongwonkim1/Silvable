@@ -144,7 +144,8 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   eleText: {
-    fontSize: 30
+    fontSize: 30,
+    color: 'black'
   },
   bottomTap: {
     flex: 1,
