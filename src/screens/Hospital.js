@@ -1,21 +1,32 @@
-import React from 'react';
+import React,{useState} from 'react';
 
 import {
     StyleSheet,
     Text,
     View,
     TouchableOpacity,
+    Pressable,
     Image,
 } from 'react-native';
-
+import Tts from "react-native-tts";
 export default function Hospital({ navigation }) {
+
+    const [letter, setLetter] = useState("");
+    onPressRead = () => {
+        Tts.stop();
+        Tts.speak(letter);
+    }
 
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Text style={{ fontSize: 30, fontWeight: '600', color: 'black' }}>증상을 선택하세요</Text>
             <View style={styles.row}>
-                <TouchableOpacity style={styles.items}
-                    onPress={() => navigation.navigate('MapToHospital', { id: '정형외과' })}>
+                <Pressable style={styles.items}
+                    onPress={() => navigation.navigate('MapToHospital', { id: '정형외과' })}
+                    onLongPress={() => {
+                        setLetter("정형외과");
+                        onPressRead()
+                    }}>
                     <View style={styles.itemTitle}>
                         <Text style={styles.title}>정형외과</Text>
                     </View>
@@ -25,9 +36,13 @@ export default function Hospital({ navigation }) {
                             source={require('./assets/hospitalImages/정형외과.png')}
                         />
                     </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.items}
-                    onPress={() => navigation.navigate('MapToHospital', { id: '안과' })}>
+                </Pressable>
+                <Pressable style={styles.items}
+                    onPress={() => navigation.navigate('MapToHospital', { id: '안과' })}
+                    onLongPress={() => {
+                        setLetter("안과");
+                        onPressRead()
+                    }}>
                     <View style={styles.itemTitle}>
                         <Text style={styles.title}>안과</Text>
                     </View>
@@ -37,11 +52,15 @@ export default function Hospital({ navigation }) {
                             source={require('./assets/hospitalImages/안과.png')}
                         />
                     </View>
-                </TouchableOpacity>
+                </Pressable>
             </View >
             <View style={styles.row}>
-                <TouchableOpacity style={styles.items}
-                    onPress={() => navigation.navigate('MapToHospital', { id: '이비인후과' })}>
+                <Pressable style={styles.items}
+                    onPress={() => navigation.navigate('MapToHospital', { id: '이비인후과' })}
+                    onLongPress={() => {
+                        setLetter("이비인후과");
+                        onPressRead()
+                    }}>
                     <View style={styles.itemTitle}>
                         <Text style={styles.title}>이비인후과</Text>
                     </View>
@@ -51,9 +70,14 @@ export default function Hospital({ navigation }) {
                             source={require('./assets/hospitalImages/이비인후과.png')}
                         />
                     </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.items}
-                    onPress={() => navigation.navigate('MapToHospital', { id: '정신과' })}>
+                </Pressable>
+                <Pressable style={styles.items}
+                    onPress={() => navigation.navigate('MapToHospital', { id: '정신과' })}
+
+                    onLongPress={() => {
+                        setLetter("정신과");
+                        onPressRead()
+                    }}>
                     <View style={styles.itemTitle}>
                         <Text style={styles.title}>정신과</Text>
                     </View>
@@ -63,11 +87,15 @@ export default function Hospital({ navigation }) {
                             source={require('./assets/hospitalImages/정신과.png')}
                         />
                     </View>
-                </TouchableOpacity>
+                </Pressable>
             </View>
             <View style={styles.row}>
-                <TouchableOpacity style={styles.items}
-                    onPress={() => navigation.navigate('MapToHospital', { id: '치과' })}>
+                <Pressable style={styles.items}
+                    onPress={() => navigation.navigate('MapToHospital', { id: '치과' })}
+                    onLongPress={() => {
+                        setLetter("치과");
+                        onPressRead()
+                    }}>
                     <View style={styles.itemTitle}>
                         <Text style={styles.title}>치과</Text>
                     </View>
@@ -77,9 +105,13 @@ export default function Hospital({ navigation }) {
                             source={require('./assets/hospitalImages/치과.png')}
                         />
                     </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.items}
-                    onPress={() => navigation.navigate('MapToHospital', { id: '성형외과' })}>
+                </Pressable>
+                <Pressable style={styles.items}
+                    onPress={() => navigation.navigate('MapToHospital', { id: '성형외과' })}
+                    onLongPress={() => {
+                        setLetter("성형외과");
+                        onPressRead()
+                    }}>
                     <View style={styles.itemTitle}>
                         <Text style={styles.title}>성형외과</Text>
                     </View>
@@ -89,7 +121,7 @@ export default function Hospital({ navigation }) {
                             source={require('./assets/hospitalImages/성형외과.png')}
                         />
                     </View>
-                </TouchableOpacity>
+                </Pressable>
             </View>
         </View >
     );
