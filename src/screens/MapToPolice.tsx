@@ -6,6 +6,7 @@ import Geolocation from 'react-native-geolocation-service';
 import MapViewDirections from 'react-native-maps-directions';
 import Geocoder from 'react-native-geocoding';
 import data from '../policeList';
+import * as async from 'async'
 
 Geocoder.init(`AIzaSyDDXb9N2-02HXrCo7LBuuNSxSg-Dp4-w64`, { language: "kor" }); // use a valid API key
 
@@ -22,7 +23,6 @@ interface ILocation {
 export default function MapToPolice({ }) {
     const [location, setLocation] = useState<ILocation | undefined>(undefined);  // 현재위치
     const [destination, setDestination] = useState<ILocation | undefined>(undefined);  // 도착지 위치(경찰서)
-    const [goto, setGoto] = useState('수원남부경찰서');
 
     async function requestPermissions() {
         if (Platform.OS === 'ios') {
@@ -46,16 +46,16 @@ export default function MapToPolice({ }) {
                 }
             );
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                console.log(location)
+                getCurrentPosition();
+
             }
         }
     }
 
-    // 처음 접속할때 location이 undefine인 오류 해결하기.
-    function chooseCloseDest() {
-        console.log(data[0])
-        let minIndex = 0
-        let minGeo = 10000;
+    async function chooseCloseDest() {
+        console.log('가장 가까운 경찰서를 검색합니다.')
+        let minIndex = 0  // 최소거리 인덱스 변수 - 첫번째 인덱스로 초기화
+        let minGeo = 10000;  // 최소거리 변수 - 충분히 큰 수로 초기화
         let loc = { latitude: 0, longitude: 0 };
         location ? (
             loc = location
@@ -64,16 +64,14 @@ export default function MapToPolice({ }) {
         for (let i = 0; i < Object.keys(data).length; i += 1) {
             if (Math.abs((parseFloat(data[i].REFINE_WGS84_LAT) - loc.latitude)) + Math.abs((parseFloat(data[i].REFINE_WGS84_LOGT) - loc.longitude)) < minGeo) {
                 minGeo = Math.abs((parseFloat(data[i].REFINE_WGS84_LAT) - loc.latitude)) + Math.abs((parseFloat(data[i].REFINE_WGS84_LOGT) - loc.longitude));
-                console.log(minGeo)
                 minIndex = i;
             }
         }
-        console.log(data[minIndex]);
+        //console.log(data[minIndex]);
         setDestination({ latitude: parseFloat(data[minIndex].REFINE_WGS84_LAT), longitude: parseFloat(data[minIndex].REFINE_WGS84_LOGT) })
     }
-
-    useEffect(() => {
-        requestPermissions();
+    function getCurrentPosition() {
+        console.log('현재위치를 가져옵니다.')
         Geolocation.getCurrentPosition(
             position => {
                 const { latitude, longitude } = position.coords;
@@ -87,7 +85,11 @@ export default function MapToPolice({ }) {
             },
             { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
         );
-        chooseCloseDest()
+
+    }
+    useEffect(() => {
+        requestPermissions();
+        chooseCloseDest();
     }, []);
 
 
@@ -116,7 +118,14 @@ export default function MapToPolice({ }) {
                                     title="현재 위치"
                                     description="this is a marker example"
                                 />
-
+                                {destination ? (
+                                    <Marker
+                                        coordinate={{ latitude: destination.latitude, longitude: destination.longitude }}
+                                        title="경찰서"
+                                        description="this is a marker example"
+                                    />
+                                ) : (<></>)
+                                }
                                 <MapViewDirections
                                     origin={location}
                                     destination={destination}
@@ -126,7 +135,8 @@ export default function MapToPolice({ }) {
                                     mode="TRANSIT"
                                     optimizeWaypoints={true}
                                     onError={(errorMessage) => {
-                                        console.log('도착할 수 없는 장소입니다.');
+                                        console.log('도착할 수 없는 장소입니다. (', errorMessage, ')');
+                                        chooseCloseDest();
                                     }}
                                 />
                             </MapView>

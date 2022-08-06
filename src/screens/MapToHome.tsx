@@ -19,8 +19,8 @@ interface ILocation {
 
 export default function MapToHome({ }) {
     const [location, setLocation] = useState<ILocation | undefined>(undefined);  // 현재위치
-    const [destination, setDestination] = useState({ latitude: 0, longitude: 0 });  // 도착지 위치(경찰서)
-    const [goto, setGoto] = useState('수원시 권선구 동수원로58번길 21');
+    const [destination, setDestination] = useState({ latitude: 38, longitude: 128 });  // 도착지 위치(경찰서)
+    const [goto, setGoto] = useState('수원시 권선구 동수원로58번길 21');  // 추후 DB에 저장된 주소로 사용
 
     async function requestPermissions() {
         if (Platform.OS === 'ios') {
@@ -44,7 +44,7 @@ export default function MapToHome({ }) {
                 }
             );
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                console.log(location)
+                getGeoCode()
             }
         }
     }
@@ -85,17 +85,6 @@ export default function MapToHome({ }) {
             <View style={{ flex: 1 }}>
                 {location ? (
                     <ScrollView style={{ flex: 1 }}>
-                        <View style={{ flex: 2, backgroundColor: 'black' }}>
-                            <TextInput
-                                style={styles.input}
-                                onChangeText={setGoto}
-                                placeholder='위치 입력'
-                                value={goto}
-                            />
-                            <TouchableOpacity onPress={getGeoCode}>
-                                <Text>검색</Text>
-                            </TouchableOpacity>
-                        </View>
                         <View style={{ flex: 5 }}>
                             <MapView
                                 style={{ width: winWidth, height: winHeight }}
@@ -131,6 +120,7 @@ export default function MapToHome({ }) {
                                     optimizeWaypoints={true}
                                     onError={(errorMessage) => {
                                         console.log('도착할 수 없는 장소입니다.');
+                                        getGeoCode();
                                     }}
                                 />
                             </MapView>
