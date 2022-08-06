@@ -70,10 +70,26 @@
        </View>
        <View style={{height:100}}>
          <View style={[styles.bottomTap]}>
-           <Image style={[styles.btImg]} source={require('./assets/뒤로가기.jpg')}/>
-           <Image style={[styles.btImg]} source={require('./assets/홈.png')}/>
+          <Pressable onLongPress={()=> {
+        setLetter("뒤로가기");
+        onPressRead()}}>
+            <Image style={[styles.btImg]} source={require('./assets/뒤로가기.jpg')}/>
+          </Pressable >
+          <Pressable onLongPress={()=> {
+        setLetter("홈");
+        onPressRead()}}>
+            <Image style={[styles.btImg]} source={require('./assets/홈.png')}/>
+            </Pressable>
+          <Pressable onLongPress={()=> {
+        setLetter("119");
+        onPressRead()}}>
            <Image style={[styles.btImg]} source={require('./assets/119.png')}/>
-           <Image style={[styles.btImg]} source={require('./assets/돋보기.png')}/>
+          </Pressable>
+          <Pressable onLongPress={()=> {
+        setLetter("돋보기");
+        onPressRead()}} onPress={()=>navigation.navigate("Magnify")}>
+            <Image style={[styles.btImg]} source={require('./assets/돋보기.png')}/>
+          </Pressable>
          </View>
        </View>
      </View>
@@ -99,7 +115,7 @@
      flex:1,
      shadowColor:'gray',
      shadowOffset:{
-       width:5,
+     width:5,
        height:5},
        shadowOpacity:0.5,
        shadowRadius:5  
