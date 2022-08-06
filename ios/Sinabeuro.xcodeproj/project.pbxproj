@@ -11,8 +11,10 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		4B66B773FD0EA41F9C8C737F /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906AE5053A2AA9E7A8FD33F5 /* ExpoModulesProvider.swift */; };
 		539221D2289815F500289EAF /* BridgingFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539221D1289815F500289EAF /* BridgingFile.swift */; };
 		640718B52E04A6C1BCC127DE /* libPods-Sinabeuro-SinabeuroTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C60187EB3F3B127DE9590830 /* libPods-Sinabeuro-SinabeuroTests.a */; };
+		7C348AF9BF90E00515B8EE19 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56420272FAFB2DA5A20458F /* ExpoModulesProvider.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		EF87363A536C48A75C671445 /* libPods-Sinabeuro.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C79A54716AED382815951B5B /* libPods-Sinabeuro.a */; };
 /* End PBXBuildFile section */
@@ -42,7 +44,9 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Sinabeuro/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		85EC8A99007F76CA1535F8FE /* Pods-Sinabeuro-SinabeuroTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sinabeuro-SinabeuroTests.debug.xcconfig"; path = "Target Support Files/Pods-Sinabeuro-SinabeuroTests/Pods-Sinabeuro-SinabeuroTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8AADF7CDAA7C7846D6928574 /* Pods-Sinabeuro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sinabeuro.release.xcconfig"; path = "Target Support Files/Pods-Sinabeuro/Pods-Sinabeuro.release.xcconfig"; sourceTree = "<group>"; };
+		906AE5053A2AA9E7A8FD33F5 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-Sinabeuro-SinabeuroTests/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		9FFAC2C920DCE6679B68D59D /* Pods-Sinabeuro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sinabeuro.debug.xcconfig"; path = "Target Support Files/Pods-Sinabeuro/Pods-Sinabeuro.debug.xcconfig"; sourceTree = "<group>"; };
+		B56420272FAFB2DA5A20458F /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-Sinabeuro/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		C60187EB3F3B127DE9590830 /* libPods-Sinabeuro-SinabeuroTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Sinabeuro-SinabeuroTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C79A54716AED382815951B5B /* libPods-Sinabeuro.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Sinabeuro.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -86,6 +90,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0595737FB67F37F6CD4677E6 /* SinabeuroTests */ = {
+			isa = PBXGroup;
+			children = (
+				906AE5053A2AA9E7A8FD33F5 /* ExpoModulesProvider.swift */,
+			);
+			name = SinabeuroTests;
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* Sinabeuro */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +139,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
 				539221D0289815F400289EAF /* Sinabeuro-Bridging-Header.h */,
+				8795FF5BEB70BD753D3BD2B3 /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -142,6 +155,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		8795FF5BEB70BD753D3BD2B3 /* ExpoModulesProviders */ = {
+			isa = PBXGroup;
+			children = (
+				C015A728298804C049BEC1D3 /* Sinabeuro */,
+				0595737FB67F37F6CD4677E6 /* SinabeuroTests */,
+			);
+			name = ExpoModulesProviders;
+			sourceTree = "<group>";
+		};
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +173,14 @@
 				FED95706082B640822F332BF /* Pods-Sinabeuro-SinabeuroTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		C015A728298804C049BEC1D3 /* Sinabeuro */ = {
+			isa = PBXGroup;
+			children = (
+				B56420272FAFB2DA5A20458F /* ExpoModulesProvider.swift */,
+			);
+			name = Sinabeuro;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -410,6 +440,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00E356F31AD99517003FC87E /* SinabeuroTests.m in Sources */,
+				4B66B773FD0EA41F9C8C737F /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,6 +451,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				539221D2289815F500289EAF /* BridgingFile.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				7C348AF9BF90E00515B8EE19 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +488,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sinabeuro.app/Sinabeuro";
@@ -481,6 +514,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sinabeuro.app/Sinabeuro";
@@ -506,6 +540,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Sinabeuro;
 				SWIFT_OBJC_BRIDGING_HEADER = "Sinabeuro-Bridging-Header.h";
@@ -533,6 +568,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Sinabeuro;
 				SWIFT_OBJC_BRIDGING_HEADER = "Sinabeuro-Bridging-Header.h";

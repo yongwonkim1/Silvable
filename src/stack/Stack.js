@@ -9,6 +9,7 @@ import Hospital from '../screens/Hospital';
 import MapToHospital from '../screens/MapToHospital';
 import MapToHome from '../screens/MapToHome';
 import MapToPolice from '../screens/MapToPolice';
+import Magnify from '../screens/Magnify';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ const StackNavigation = () => {
       <Stack.Screen name="Memo" component={Memo} />
       <Stack.Screen name="Stt" component={Stt} />
       <Stack.Screen name="Hospital" component={Hospital} />
+      <Stack.Screen name="Magnify" component={Magnify} />
       <Stack.Screen name="MapToHospital" component={MapToHospital} />
       <Stack.Screen name="MapToHome" component={MapToHome} />
       <Stack.Screen name="MapToPolice" component={MapToPolice} />

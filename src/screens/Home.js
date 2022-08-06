@@ -50,8 +50,7 @@ const Home = ({ navigation }) => {
           <Image style={[styles.eleImg]} source={require('./assets/경찰.png')}></Image>
           <Text style={[styles.eleText]}>가까운 경찰서</Text>
         </Pressable>
-        <Pressable style={[styles.element, { flex: 2, backgroundColor: '#b5e61d' }]}
-          onPress={() => navigation.navigate('Stt')}
+        <Pressable style={[styles.element, { flex: 2, backgroundColor: '#b5e61d' }]} onPress={() => navigation.navigate('Stt')}
           onLongPress={() => {
             setLetter("음성인식");
             onPressRead()
@@ -80,10 +79,30 @@ const Home = ({ navigation }) => {
       </View>
       <View style={{ height: 100 }}>
         <View style={[styles.bottomTap]}>
-          <Image style={[styles.btImg]} source={require('./assets/뒤로가기.jpg')} />
-          <Image style={[styles.btImg]} source={require('./assets/홈.png')} />
-          <Image style={[styles.btImg]} source={require('./assets/119.png')} />
-          <Image style={[styles.btImg]} source={require('./assets/돋보기.png')} />
+          <Pressable onLongPress={() => {
+            setLetter("뒤로가기");
+            onPressRead()
+          }}>
+            <Image style={[styles.btImg]} source={require('./assets/뒤로가기.jpg')} />
+          </Pressable >
+          <Pressable onLongPress={() => {
+            setLetter("홈");
+            onPressRead()
+          }}>
+            <Image style={[styles.btImg]} source={require('./assets/홈.png')} />
+          </Pressable>
+          <Pressable onLongPress={() => {
+            setLetter("119");
+            onPressRead()
+          }}>
+            <Image style={[styles.btImg]} source={require('./assets/119.png')} />
+          </Pressable>
+          <Pressable onLongPress={() => {
+            setLetter("돋보기");
+            onPressRead()
+          }} onPress={() => navigation.navigate("Magnify")}>
+            <Image style={[styles.btImg]} source={require('./assets/돋보기.png')} />
+          </Pressable>
         </View>
       </View>
     </View>
@@ -115,6 +134,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 5,
     elevation: 20,  // 안드로이드용 그림자
+
+
   },
   eleImg: {
     height: 50,
