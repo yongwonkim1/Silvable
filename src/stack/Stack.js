@@ -7,6 +7,8 @@ import Memo from '../screens/Memo';
 import Stt from '../screens/Stt';
 import Hospital from '../screens/Hospital';
 import MapToHospital from '../screens/MapToHospital';
+import MapToHome from '../screens/MapToHome';
+import MapToPolice from '../screens/MapToPolice';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +20,8 @@ const StackNavigation = () => {
       <Stack.Screen name="Stt" component={Stt} />
       <Stack.Screen name="Hospital" component={Hospital} />
       <Stack.Screen name="MapToHospital" component={MapToHospital} />
+      <Stack.Screen name="MapToHome" component={MapToHome} />
+      <Stack.Screen name="MapToPolice" component={MapToPolice} />
     </Stack.Navigator>
   );
 }

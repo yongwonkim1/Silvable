@@ -22,6 +22,7 @@ const Home = ({ navigation }) => {
       <View style={{ flex: 1 }}></View>
       <View style={[styles.subCon]}>
         <Pressable style={[styles.element, { flex: 3, backgroundColor: '#19ce60' }]}
+          onPress={() => navigation.navigate('MapToHome')}
           onLongPress={() => {
             setLetter("집으로 길안내");
             onPressRead()
@@ -41,6 +42,7 @@ const Home = ({ navigation }) => {
       </View>
       <View style={[styles.subCon]}>
         <Pressable style={[styles.element, { flex: 3, backgroundColor: 'white' }]}
+          onPress={() => navigation.navigate('MapToPolice')}
           onLongPress={() => {
             setLetter("가까운 경찰서");
             onPressRead()
