@@ -1,18 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from "react";
+import { View, StyleSheet, Text, Platform, PermissionsAndroid, ScrollView, Dimensions, TextInput, TouchableOpacity, Button } from "react-native";
 
-import {
+import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
+import Geolocation from 'react-native-geolocation-service';
+import MapViewDirections from 'react-native-maps-directions';
+import Geocoder from 'react-native-geocoding';
+import data from '../policeList';
 
-    StyleSheet,
-    Text,
-    View,
-    Button,
-} from 'react-native';
+Geocoder.init(`AIzaSyDDXb9N2-02HXrCo7LBuuNSxSg-Dp4-w64`, { language: "kor" }); // use a valid API key
 
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
-import { enableLatestRenderer } from 'react-native-maps';
-//import NaverMapView from "react-native-nmap";
 
-export default function MapToHospital({ route, navigation }) {
+const winWidth = Dimensions.get('window').width;
+const winHeight = Dimensions.get('window').height;
+const GOOGLE_MAPS_APIKEY = 'AIzaSyDDXb9N2-02HXrCo7LBuuNSxSg-Dp4-w64';
+
+interface ILocation {
+    latitude: number;
+    longitude: number;
+}
+
+export default function MapToHospital({ route }: any) {
     const [department, setDepartment] = useState(route.params.id);
     const [time, setTime] = useState(new Date());
     useEffect(() => {
@@ -22,9 +29,6 @@ export default function MapToHospital({ route, navigation }) {
         return () => clearInterval(id);
     }, [])
 
-    const P0 = { latitude: 37.564362, longitude: 126.977011 };
-    const P1 = { latitude: 37.565051, longitude: 126.978567 };
-    const P2 = { latitude: 37.565383, longitude: 126.976292 };
 
     return (
         <View style={{ flex: 1, alignItems: 'center' }}>
