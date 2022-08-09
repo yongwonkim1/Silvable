@@ -6,7 +6,6 @@ import Geolocation from 'react-native-geolocation-service';
 import MapViewDirections from 'react-native-maps-directions';
 import Geocoder from 'react-native-geocoding';
 import data from '../policeList';
-import * as async from 'async'
 
 Geocoder.init(`AIzaSyDDXb9N2-02HXrCo7LBuuNSxSg-Dp4-w64`, { language: "kor" }); // use a valid API key
 
@@ -23,6 +22,7 @@ interface ILocation {
 export default function MapToPolice({ }) {
     const [location, setLocation] = useState<ILocation | undefined>(undefined);  // 현재위치
     const [destination, setDestination] = useState<ILocation | undefined>(undefined);  // 도착지 위치(경찰서)
+
 
     async function requestPermissions() {
         if (Platform.OS === 'ios') {
@@ -116,13 +116,13 @@ export default function MapToPolice({ }) {
                                 <Marker
                                     coordinate={{ latitude: location.latitude, longitude: location.longitude }}
                                     title="현재 위치"
-                                    description="this is a marker example"
+                                    description="출발 위치입니다."
                                 />
                                 {destination ? (
                                     <Marker
                                         coordinate={{ latitude: destination.latitude, longitude: destination.longitude }}
                                         title="경찰서"
-                                        description="this is a marker example"
+                                        description="도착 위치입니다."
                                     />
                                 ) : (<></>)
                                 }
