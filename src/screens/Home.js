@@ -69,6 +69,7 @@ const Home = ({ navigation }) => {
           <Text style={[styles.eleText]}>정보 수정</Text>
         </Pressable>
         <Pressable style={[styles.element, { flex: 2, backgroundColor: 'white' }]}
+        onPress={()=>navigation.navigate('Login')}
           onLongPress={() => {
             setLetter("달력");
             onPressRead()
