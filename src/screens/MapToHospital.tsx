@@ -61,7 +61,11 @@ export default function MapToHospital({ route }: any) {
             if (data[i].TREAT_SBJECT_CONT) {
                 if ((data[i].TREAT_SBJECT_CONT).includes(department)) {
                     console.log(data[i], department)
-                    hospitalList[count] = { name: data[i].BIZPLC_NM, latitude: data[i].REFINE_WGS84_LAT, longitude: data[i].REFINE_WGS84_LOGT }
+                    hospitalList.push({
+                        name: data[i].BIZPLC_NM,
+                        latitude: data[i].REFINE_WGS84_LAT,
+                        longitude: data[i].REFINE_WGS84_LOGT,
+                    })
                     const newList = Object.assign({}, hospitalList, { [count++]: { name: data[i].BIZPLC_NM, latitude: data[i].REFINE_WGS84_LAT, longitude: data[i].REFINE_WGS84_LOGT } });
                     setHospitalList(newList)
                 }
