@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text, Platform, PermissionsAndroid, ScrollView, Dimensions, TextInput, TouchableOpacity, Button } from "react-native";
+import {
+    View,
+    StyleSheet,
+    Text,
+    Platform,
+    PermissionsAndroid,
+    ScrollView,
+    Dimensions,
+    Pressable
+} from "react-native";
 
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import Geolocation from 'react-native-geolocation-service';
@@ -62,7 +71,9 @@ export default function MapToHospital({ route }: any) {
             if (data[i].TREAT_SBJECT_CONT) {
                 if ((data[i].TREAT_SBJECT_CONT).includes(department)) {
                     //console.log(data[i], department)
-                    hospitalList.push({ name: data[i].BIZPLC_NM, latitude: data[i].REFINE_WGS84_LAT, longitude: data[i].REFINE_WGS84_LOGT, addr: data[i].REFINE_ROADNM_ADDR })
+                    if (!(data[i].BSN_STATE_NM).includes("폐업")) {
+                        hospitalList.push({ name: data[i].BIZPLC_NM, latitude: data[i].REFINE_WGS84_LAT, longitude: data[i].REFINE_WGS84_LOGT, addr: data[i].REFINE_ROADNM_ADDR })
+                    }
                 }
             }
         }
@@ -116,8 +127,11 @@ export default function MapToHospital({ route }: any) {
 
         <View style={{ flex: 1, alignItems: 'center' }}>
             <View style={{ flex: 1 }}>
-                <Text style={{ fontSize: 20, color: 'black' }}>가장 가까운 <Text style={{ fontWeight: '600' }}>{department}</Text>를 검색합니다~</Text>
+                <Text style={{ fontSize: 20, color: 'black' }}>가장 가까운 <Text style={{ fontWeight: '600' }}>{department}과</Text>를 검색합니다~</Text>
                 <Text style={{ color: 'black' }}>{name}</Text>
+                <Pressable>
+
+                </Pressable>
             </View>
             <View style={{ flex: 2 }}>
                 {location ? (
@@ -159,7 +173,8 @@ export default function MapToHospital({ route }: any) {
                                     onError={(errorMessage) => {
                                         console.log('도착할 수 없는 장소입니다. (', errorMessage, ')');
                                         chooseCloseDest();
-                                        setHospitalList(new Array())
+                                        const arr: React.SetStateAction<any[]> = []
+                                        setHospitalList(arr)  // 빈 배열로 설정
                                     }}
                                 />
                             </MapView>

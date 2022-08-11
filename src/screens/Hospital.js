@@ -22,7 +22,7 @@ export default function Hospital({ navigation }) {
             <Text style={{ fontSize: 30, fontWeight: '600', color: 'black' }}>증상을 선택하세요</Text>
             <View style={styles.row}>
                 <Pressable style={styles.items}
-                    onPress={() => navigation.navigate('MapToHospital', { id: '정형외과' })}
+                    onPress={() => navigation.navigate('MapToHospital', { id: '정형외' })}
                     onLongPress={() => {
                         setLetter("정형외과");
                         onPressRead()
@@ -38,7 +38,7 @@ export default function Hospital({ navigation }) {
                     </View>
                 </Pressable>
                 <Pressable style={styles.items}
-                    onPress={() => navigation.navigate('MapToHospital', { id: '안과' })}
+                    onPress={() => navigation.navigate('MapToHospital', { id: '안' })}
                     onLongPress={() => {
                         setLetter("안과");
                         onPressRead()
@@ -56,7 +56,7 @@ export default function Hospital({ navigation }) {
             </View >
             <View style={styles.row}>
                 <Pressable style={styles.items}
-                    onPress={() => navigation.navigate('MapToHospital', { id: '이비인후과' })}
+                    onPress={() => navigation.navigate('MapToHospital', { id: '이비인후' })}
                     onLongPress={() => {
                         setLetter("이비인후과");
                         onPressRead()
@@ -72,7 +72,7 @@ export default function Hospital({ navigation }) {
                     </View>
                 </Pressable>
                 <Pressable style={styles.items}
-                    onPress={() => navigation.navigate('MapToHospital', { id: '정신과' })}
+                    onPress={() => navigation.navigate('MapToHospital', { id: '정신' })}
 
                     onLongPress={() => {
                         setLetter("정신과");
@@ -91,7 +91,7 @@ export default function Hospital({ navigation }) {
             </View>
             <View style={styles.row}>
                 <Pressable style={styles.items}
-                    onPress={() => navigation.navigate('MapToHospital', { id: '치과' })}
+                    onPress={() => navigation.navigate('MapToHospital', { id: '치' })}
                     onLongPress={() => {
                         setLetter("치과");
                         onPressRead()
@@ -107,7 +107,7 @@ export default function Hospital({ navigation }) {
                     </View>
                 </Pressable>
                 <Pressable style={styles.items}
-                    onPress={() => navigation.navigate('MapToHospital', { id: '성형외과' })}
+                    onPress={() => navigation.navigate('MapToHospital', { id: '성형외' })}
                     onLongPress={() => {
                         setLetter("성형외과");
                         onPressRead()

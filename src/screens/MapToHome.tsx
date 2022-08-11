@@ -20,7 +20,7 @@ interface ILocation {
 export default function MapToHome({ }) {
     const [location, setLocation] = useState<ILocation | undefined>(undefined);  // 현재위치
     const [destination, setDestination] = useState({ latitude: 38, longitude: 128 });  // 도착지 위치(경찰서)
-    const [goto, setGoto] = useState('수원시 권선구 동수원로58번길 21');  // 추후 DB에 저장된 주소로 사용
+    const [goto, setGoto] = useState('경기도 고양시 덕양구 통일로768번길 18 (관산동, 2층, 3층, 4층, 6층)');  // 추후 DB에 저장된 주소로 사용
 
     async function requestPermissions() {
         if (Platform.OS === 'ios') {
@@ -101,13 +101,13 @@ export default function MapToHome({ }) {
                                 <Marker
                                     coordinate={{ latitude: location.latitude, longitude: location.longitude }}
                                     title="현재 위치"
-                                    description="this is a marker example"
+                                    description="출발 위치입니다."
                                 />
                                 {destination ? (  // destination이 있을시
                                     <Marker
                                         coordinate={{ latitude: destination.latitude, longitude: destination.longitude }}
                                         title={goto}
-                                        description="this is a marker example"
+                                        description="집"
                                     />
                                 ) : {}}
                                 <MapViewDirections
