@@ -2,7 +2,7 @@ export default
     [
         {
             "SIGUN_NM": "0",
-            "BIZPLC_NM": "0",
+            "BIZPLC_NM": "loading...",
             "REFINE_ZIPNO": "477810",
             "REFINE_ROADNM_ADDR": "경기도 가평군 청평면 경춘로 791-11",
             "REFINE_LOTNO_ADDR": "경기도 가평군 청평면 441번지 43호",

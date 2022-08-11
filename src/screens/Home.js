@@ -6,8 +6,6 @@ import {
   Text,
   Image,
   View,
-  Button,
-  TouchableOpacity,
   Linking
 } from 'react-native';
 import Tts from "react-native-tts";

@@ -33,7 +33,7 @@ import Home from './src/screens/Home';
 // import Memo from '.src/screens/Memo';
 import Stt from './src/screens/Stt';
 import Hospital from './src/screens/Hospital';
-// import MapToHospital from './src/screens/MapToHospital';
+import MapToHospital from './src/screens/MapToHospital';
 import MapToHome from './src/screens/MapToHome';
 import MapToPolice from './src/screens/MapToPolice';
 import Magnify from './src/screens/Magnify';
@@ -62,7 +62,7 @@ export default function App() {
             <Stack.Screen name="Stt" component={Stt} />
             <Stack.Screen name="Hospital" component={Hospital} />
             <Stack.Screen name="Magnify" component={Magnify} />
-            {/* <Stack.Screen name="MapToHospital" component={MapToHospital} /> */}
+            <Stack.Screen name="MapToHospital" component={MapToHospital} />
             <Stack.Screen name="MapToHome" component={MapToHome} />
             <Stack.Screen name="MapToPolice" component={MapToPolice} />
           </Stack.Navigator>
