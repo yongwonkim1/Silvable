@@ -7,7 +7,8 @@ import {
   Image,
   View,
   Button,
-  TouchableOpacity
+  TouchableOpacity,
+  Linking
 } from 'react-native';
 import Tts from "react-native-tts";
 const Home = ({ navigation }) => {
@@ -69,7 +70,7 @@ const Home = ({ navigation }) => {
           <Text style={[styles.eleText]}>정보 수정</Text>
         </Pressable>
         <Pressable style={[styles.element, { flex: 2, backgroundColor: 'white' }]}
-        onPress={()=>navigation.navigate('Login')}
+          onPress={() => navigation.navigate('Login')}
           onLongPress={() => {
             setLetter("달력");
             onPressRead()
@@ -95,6 +96,7 @@ const Home = ({ navigation }) => {
           <Pressable onLongPress={() => {
             setLetter("119");
             onPressRead()
+            { Linking.openURL(`tel:119`) }
           }}>
             <Image style={[styles.btImg]} source={require('./assets/119.png')} />
           </Pressable>
