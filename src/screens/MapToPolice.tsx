@@ -22,6 +22,8 @@ interface ILocation {
 export default function MapToPolice({ }) {
     const [location, setLocation] = useState<ILocation | undefined>(undefined);  // 현재위치
     const [destination, setDestination] = useState<ILocation | undefined>(undefined);  // 도착지 위치(경찰서)
+    const [name, setName] = useState('경찰서 이름');  // 경찰서 이름
+    const [address, setAddress] = useState('경찰서 주소');  // 경찰서 주소
 
 
     async function requestPermissions() {
@@ -67,8 +69,16 @@ export default function MapToPolice({ }) {
                 minIndex = i;
             }
         }
-        //console.log(data[minIndex]);
         setDestination({ latitude: parseFloat(data[minIndex].REFINE_WGS84_LAT), longitude: parseFloat(data[minIndex].REFINE_WGS84_LOGT) })
+
+        if (data[minIndex].NM) {
+            setName(data[minIndex].NM)  // 되는데 왜 빨간줄??
+        }
+        else if (data[minIndex].INST_NM) {
+            setName(data[minIndex].INST_NM)  // 되는데 왜 빨간줄??
+        }
+        setAddress(data[minIndex].REFINE_ROADNM_ADDR)
+
     }
     function getCurrentPosition() {
         console.log('현재위치를 가져옵니다.')
@@ -100,6 +110,11 @@ export default function MapToPolice({ }) {
             <View style={{ flex: 1 }}>
                 {location ? (
                     <ScrollView style={{ flex: 1 }}>
+                        <View style={{ flex: 1 }}>
+                            <Text style={styles.destinationName}>
+                                도착지 : {name}
+                            </Text>
+                        </View>
                         <View style={{ flex: 5 }}>
                             <MapView
                                 style={{ width: winWidth, height: winHeight }}
@@ -121,8 +136,8 @@ export default function MapToPolice({ }) {
                                 {destination ? (
                                     <Marker
                                         coordinate={{ latitude: destination.latitude, longitude: destination.longitude }}
-                                        title="경찰서"
-                                        description="도착 위치입니다."
+                                        title={name}
+                                        description={address}
                                     />
                                 ) : (<></>)
                                 }
@@ -163,4 +178,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
     },
+    destinationName: {
+        color: 'black',
+        fontSize: 30,
+    }
 });
