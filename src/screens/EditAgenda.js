@@ -29,11 +29,10 @@ const App = ({navigation,route}) => {
         </Text>
       </View>
       <View style={[styles.text]}>
-        <TextInput value={plan} onchange={setPlan} multiline={true} style={[styles.input]}></TextInput> 
+        <TextInput value={plan} onChangeText={setPlan} multiline={true} style={[styles.input]}></TextInput> 
       </View>
       <View style={[styles.button]}>
         <Button title="음성인식" onPress={()=>navigation.navigate('Stt',{
-          
           back:'EditAgenda',
           merge: true,})}/>
       <Pressable style={[styles.button2]} onPress={()=>naviagtion.goBack()}>
