@@ -37,9 +37,11 @@ const App = ({navigation,route}) => {
           merge: true,})}/>
       <Pressable style={[styles.button2]} onPress={()=>navigation.goBack()}>
         <Text style={{marginTop:10,flex:1,color:"white",fontSize:30}}>수정</Text>
+        {/*파이어베이스 수정추가*/}
       </Pressable>
       <Pressable style={[styles.button3]} onPress={()=>navigation.goBack()}>
         <Text style={{marginTop:10,flex:1, color:"white",fontSize:30}}>삭제</Text>
+        {/*파이어베이스 삭제추가*/}
       </Pressable>
       </View>
     </View>
