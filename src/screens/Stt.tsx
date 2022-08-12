@@ -234,7 +234,7 @@ class Stt extends Component<Props, State> {
            {this.state.partialResults.map((result, index) => {
           return (
             <Text key={`partial-result-${index}`} style={styles.show}>
-              {this.state.partialResults}
+              {this.state.partialResults[0]}
             </Text>
           );
         })}
@@ -249,7 +249,7 @@ class Stt extends Component<Props, State> {
         </Pressable> :
         <Pressable style={styles.box} onPress={()=>{if(this.state.end!=='√'){console.log("hello")}else(this.props.navigation.navigate({
           name: params.back,
-          params:{text:this.state.partialResults},
+          params:{text:this.state.partialResults[0]},
           merge: true,
         }),{text : this.state.partialResults})}}>
             <Image style={styles.img1} source={require('./assets/micOff.png')}></Image>

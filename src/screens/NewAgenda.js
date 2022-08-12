@@ -33,7 +33,7 @@ useEffect(()=>{
       <Button title="음성인식" onPress={()=>navigation.navigate('Stt',{
           back:'NewAgenda',
           merge: true,})}/>
-      <Pressable title="저장" style={[styles.button]} onPress={()=>naviagtion.goBack()}>
+      <Pressable title="저장" style={[styles.button]} onPress={()=>navigation.goBack()}>
         <Text style={{color:"white",fontSize:30}}>저장하기</Text>
       </Pressable>
     </View>

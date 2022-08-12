@@ -13,13 +13,13 @@ import {
   TouchableOpacity,
   TextInput
 } from 'react-native';
-
+//JSON.stringify(route.params?.text)
 const App = ({navigation,route}) => {
   const [plan,setPlan] = React.useState(route.params?.text)
-  // useEffect(()=>{
-  //   setPlan(route.params?.text);
+  useEffect(()=>{
+    setPlan(route.params?.text);
 
-  // },[route.params?.text]);
+  },[route.params?.text]);
   return (
     <View style={[styles.container]}>
       <View style={[styles.date]}>
@@ -29,16 +29,16 @@ const App = ({navigation,route}) => {
         </Text>
       </View>
       <View style={[styles.text]}>
-        <TextInput value={plan} onChangeText={setPlan} multiline={true} style={[styles.input]}></TextInput> 
+        <TextInput value={plan} va onChangeText={setPlan} multiline={true} style={[styles.input]}></TextInput> 
       </View>
       <View style={[styles.button]}>
         <Button title="음성인식" onPress={()=>navigation.navigate('Stt',{
           back:'EditAgenda',
           merge: true,})}/>
-      <Pressable style={[styles.button2]} onPress={()=>naviagtion.goBack()}>
+      <Pressable style={[styles.button2]} onPress={()=>navigation.goBack()}>
         <Text style={{marginTop:10,flex:1,color:"white",fontSize:30}}>수정</Text>
       </Pressable>
-      <Pressable style={[styles.button3]} onPress={()=>naviagtion.goBack()}>
+      <Pressable style={[styles.button3]} onPress={()=>navigation.goBack()}>
         <Text style={{marginTop:10,flex:1, color:"white",fontSize:30}}>삭제</Text>
       </Pressable>
       </View>
