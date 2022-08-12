@@ -37,6 +37,9 @@ import MapToHospital from './src/screens/MapToHospital';
 import MapToHome from './src/screens/MapToHome';
 import MapToPolice from './src/screens/MapToPolice';
 import Magnify from './src/screens/Magnify';
+import Agenda from './src/screens/Agenda';
+import EditAgenda from './src/screens/EditAgenda';
+import NewAgenda from './src/screens/NewAgenda';
 
 const Stack = createStackNavigator();
 
@@ -65,6 +68,9 @@ export default function App() {
             <Stack.Screen name="MapToHospital" component={MapToHospital} />
             <Stack.Screen name="MapToHome" component={MapToHome} />
             <Stack.Screen name="MapToPolice" component={MapToPolice} />
+            <Stack.Screen name="Agenda" component={Agenda} />
+            <Stack.Screen name="NewAgenda" component={NewAgenda} />
+            <Stack.Screen name="EditAgenda" component={EditAgenda} />
           </Stack.Navigator>
         </NavigationContainer>
       </ThemeProvider>

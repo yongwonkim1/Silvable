@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,7 +6,9 @@ import {
   Image,
   TouchableHighlight,
   SafeAreaView,
-  Pressable
+  Pressable,
+  RefreshControl,
+  Alert
 } from 'react-native';
 
 import Voice, {
@@ -14,6 +16,9 @@ import Voice, {
   SpeechResultsEvent,
   SpeechErrorEvent,
 } from '@react-native-voice/voice';
+import Home from './Home';
+import { removeWhitespace } from '../../utils/common';
+import { RotateInUpLeft } from 'react-native-reanimated';
 
 type Props = {};
 type State = {
@@ -27,6 +32,7 @@ type State = {
 };
 
 class Stt extends Component<Props, State> {
+  
   state = {
     recognized: '',
     pitch: '',
@@ -46,6 +52,8 @@ class Stt extends Component<Props, State> {
     Voice.onSpeechResults = this.onSpeechResults;
     Voice.onSpeechPartialResults = this.onSpeechPartialResults;
     Voice.onSpeechVolumeChanged = this.onSpeechVolumeChanged;
+    
+    
   }
 
   componentWillUnmount() {
@@ -149,9 +157,16 @@ class Stt extends Component<Props, State> {
       partialResults: [],
       end: '',
     });
+    
+    
   };
-
+  
+  _rerender=()=>{
+    this._destroyRecognizer;
+    this._startRecognizing;
+  }
   render() {
+    const {params} = this.props.route;
     return (
         <View style={{flex:1}}>
         {/*<Text style={styles.stat}>{`Started: ${this.state.started}`}</Text>
@@ -219,7 +234,7 @@ class Stt extends Component<Props, State> {
            {this.state.partialResults.map((result, index) => {
           return (
             <Text key={`partial-result-${index}`} style={styles.show}>
-              {result}
+              {this.state.partialResults}
             </Text>
           );
         })}
@@ -232,7 +247,11 @@ class Stt extends Component<Props, State> {
         <Pressable style={styles.box} onPress={this._startRecognizing}>
             <Image style={styles.img} source={require('./assets/mic.png')}></Image>
         </Pressable> :
-        <Pressable style={styles.box} onPress={this._stopRecognizing}>
+        <Pressable style={styles.box} onPress={()=>{if(this.state.end!=='√'){console.log("hello")}else(this.props.navigation.navigate({
+          name: params.back,
+          params:{text:this.state.partialResults},
+          merge: true,
+        }),{text : this.state.partialResults})}}>
             <Image style={styles.img1} source={require('./assets/micOff.png')}></Image>
         </Pressable>}
         </View>
@@ -240,6 +259,11 @@ class Stt extends Component<Props, State> {
     );
   }
 }
+// React.useEffect(() => {
+//   if (route.params?.text) {
+//   }
+// }, [route.params?.text]);
+// //{route.params?.text}
 
 const styles = StyleSheet.create({
     half:{width:200, height:200, bottom:100, right:90, position:'absolute',backgroundColor:'white'},
@@ -324,6 +348,7 @@ show:{
 });
 
 export default Stt;
+
 
 
 

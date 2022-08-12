@@ -18,7 +18,9 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={[styles.container]}>
-      <View style={{ flex: 1 }}></View>
+      <View style={{ flex: 1, justifyContent:'center', alignItems:'center'}}>
+        <Image style={{height:150, widht:150, resizeMode:'contain'}} source={require('./assets/logo.png')}/>
+      </View>
       <View style={[styles.subCon]}>
         <Pressable style={[styles.element, { flex: 3, backgroundColor: '#19ce60' }]}
           onPress={() => navigation.navigate('MapToHome')}
@@ -49,17 +51,21 @@ const Home = ({ navigation }) => {
           <Image style={[styles.eleImg]} source={require('./assets/경찰.png')}></Image>
           <Text style={[styles.eleText]}>가까운 경찰서</Text>
         </Pressable>
-        <Pressable style={[styles.element, { flex: 2, backgroundColor: '#b5e61d' }]} onPress={() => navigation.navigate('Stt')}
+        <Pressable style={[styles.element, { flex: 2, backgroundColor: '#b5e61d' }]} onPress={() => navigation.navigate('Stt',
+          {
+          back:'Home',
+        })}
           onLongPress={() => {
-            setLetter("음성인식");
+            setLetter("메모장");
             onPressRead()
           }}>
           <Image style={[styles.eleImg]} source={require('./assets/음성인식.png')}></Image>
-          <Text style={[styles.eleText]}>음성인식</Text>
+          <Text style={[styles.eleText]}>메모장</Text>
         </Pressable>
       </View>
       <View style={[styles.subCon]}>
         <Pressable style={[styles.element, { flex: 3, backgroundColor: '#87f8c8' }]}
+          onPress={() => navigation.navigate('Login')}
           onLongPress={() => {
             setLetter("정보수정");
             onPressRead()
@@ -68,7 +74,7 @@ const Home = ({ navigation }) => {
           <Text style={[styles.eleText]}>정보 수정</Text>
         </Pressable>
         <Pressable style={[styles.element, { flex: 2, backgroundColor: 'white' }]}
-          onPress={() => navigation.navigate('Login')}
+          onPress={() => navigation.navigate('Agenda')}
           onLongPress={() => {
             setLetter("달력");
             onPressRead()
