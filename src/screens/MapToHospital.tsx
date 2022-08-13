@@ -7,7 +7,8 @@ import {
     PermissionsAndroid,
     ScrollView,
     Dimensions,
-    Pressable
+    Pressable,
+    Linking
 } from "react-native";
 
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
@@ -128,17 +129,26 @@ export default function MapToHospital({ route }: any) {
         <View style={{ flex: 1, alignItems: 'center' }}>
             <View style={{ flex: 1 }}>
                 <Text style={{ fontSize: 20, color: 'black' }}>가장 가까운 <Text style={{ fontWeight: '600' }}>{department}과</Text>를 검색합니다~</Text>
-                <Text style={{ color: 'black' }}>{name}</Text>
+                <Pressable style={styles.hosName}
+                    onPress={() => {
+                        Linking.openURL(`https://search.naver.com/search.naver?where=nexearch&query=${name}`);
+                    }
+
+                    }>
+                    <Text style={{ fontSize: 40, fontWeight: "800", color: "#000066" }}>{name}</Text>
+
+                </Pressable>
+
                 <Pressable>
 
                 </Pressable>
             </View>
-            <View style={{ flex: 2 }}>
+            <View style={{ flex: 8 }}>
                 {location ? (
                     <ScrollView style={{ flex: 1 }}>
                         <View style={{ flex: 5 }}>
                             <MapView
-                                style={{ width: winWidth, height: winHeight / 1.5 }}
+                                style={{ width: winWidth, height: winHeight * 0.9 }}
                                 provider={PROVIDER_GOOGLE}
                                 showsUserLocation
                                 followsUserLocation
@@ -200,8 +210,9 @@ const styles = StyleSheet.create({
         marginTop: 32,
         backgroundColor: 'black',
     },
-    buttons: {
-        flexDirection: 'row',
+    hosName: {
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     map: {
         ...StyleSheet.absoluteFillObject,
