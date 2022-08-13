@@ -20,7 +20,7 @@ interface ILocation {
 export default function MapToHome({ }) {
     const [location, setLocation] = useState<ILocation | undefined>(undefined);  // 현재위치
     const [destination, setDestination] = useState({ latitude: 38, longitude: 128 });  // 도착지 위치(경찰서)
-    const [goto, setGoto] = useState('경기도 고양시 덕양구 통일로768번길 18 (관산동, 2층, 3층, 4층, 6층)');  // 추후 DB에 저장된 주소로 사용
+    const [goto, setGoto] = useState('');  // 추후 DB에 저장된 주소로 사용
 
     async function requestPermissions() {
         if (Platform.OS === 'ios') {
@@ -83,53 +83,62 @@ export default function MapToHome({ }) {
     return (
         <>
             <View style={{ flex: 1 }}>
+                <View style={{ flex: 1.5, alignItems: 'center', backgroundColor: 'white' }}>
+                    <Text style={{ flex: 1, color: 'black', justifyContent: 'center', fontSize: 20 }}>집 주소를 입력해주세요.</Text>
+                    <TextInput style={styles.input}
+                        returnKeyType="done"
+                        value={goto}
+                        onChangeText={(text) =>
+                            setGoto(text)
+                        }
+                        onSubmitEditing={getGeoCode}
+                    />
+                </View>
                 {location ? (
-                    <ScrollView style={{ flex: 1 }}>
-                        <View style={{ flex: 5 }}>
-                            <MapView
-                                style={{ width: winWidth, height: winHeight }}
-                                provider={PROVIDER_GOOGLE}
-                                showsUserLocation
-                                followsUserLocation
-                                initialRegion={{
-                                    latitude: location.latitude,
-                                    longitude: location.longitude,
-                                    latitudeDelta: 0.003,
-                                    longitudeDelta: 0.003,
-                                }}
-                            >
+                    <View style={{ flex: 10 }}>
+                        <MapView
+                            style={{ width: winWidth, height: winHeight * 0.9 }}
+                            provider={PROVIDER_GOOGLE}
+                            showsUserLocation
+                            followsUserLocation
+                            initialRegion={{
+                                latitude: location.latitude,
+                                longitude: location.longitude,
+                                latitudeDelta: 0.003,
+                                longitudeDelta: 0.003,
+                            }}
+                        >
+                            <Marker
+                                coordinate={{ latitude: location.latitude, longitude: location.longitude }}
+                                title="현재 위치"
+                                description="출발 위치입니다."
+                            />
+                            {destination ? (  // destination이 있을시
                                 <Marker
-                                    coordinate={{ latitude: location.latitude, longitude: location.longitude }}
-                                    title="현재 위치"
-                                    description="출발 위치입니다."
+                                    coordinate={{ latitude: destination.latitude, longitude: destination.longitude }}
+                                    title={goto}
+                                    description="집"
                                 />
-                                {destination ? (  // destination이 있을시
-                                    <Marker
-                                        coordinate={{ latitude: destination.latitude, longitude: destination.longitude }}
-                                        title={goto}
-                                        description="집"
-                                    />
-                                ) : {}}
-                                <MapViewDirections
-                                    origin={location}
-                                    destination={destination}
-                                    apikey={GOOGLE_MAPS_APIKEY}
-                                    strokeWidth={5}
-                                    strokeColor="hotpink"
-                                    mode="TRANSIT"
-                                    optimizeWaypoints={true}
-                                    onError={(errorMessage) => {
-                                        console.log('도착할 수 없는 장소입니다.');
-                                        getGeoCode();
-                                    }}
-                                />
-                            </MapView>
-                        </View>
-                    </ScrollView>
+                            ) : {}}
+                            <MapViewDirections
+                                origin={location}
+                                destination={destination}
+                                apikey={GOOGLE_MAPS_APIKEY}
+                                strokeWidth={5}
+                                strokeColor="hotpink"
+                                mode="TRANSIT"
+                                optimizeWaypoints={true}
+                                onError={(errorMessage) => {
+                                    console.log('도착할 수 없는 장소입니다.');
+                                    getGeoCode();
+                                }}
+                            />
+                        </MapView>
+                    </View>
                 ) : (
                     <ScrollView style={{ flex: 1 }}>
                         <Text style={{ flex: 1, justifyContent: 'center' }}>Loading...</Text>
-
+                        <Text>집 주소를 입력해주세요.</Text>
                     </ScrollView>
                 )
                 }
@@ -142,9 +151,13 @@ export default function MapToHome({ }) {
 
 const styles = StyleSheet.create({
     input: {
+        flex: 1.5,
         height: 40,
+        width: winWidth * 0.9,
         margin: 12,
-        borderWidth: 1,
+        borderWidth: 2,
         padding: 10,
+        borderRadius: 30,
+        color: 'black',
     },
 });
