@@ -14,9 +14,9 @@ function MemoView({navigation}) {
     try {
       const data = await usersCollection.where("email","==",email).get();
       setUsers(data._docs.map(doc => ({ ...doc.data(), id: doc.id })));
-      console.log(users);
+      
     } catch (error) {
-      console.log(error.message);
+     
     }
   };
 
@@ -27,11 +27,12 @@ function MemoView({navigation}) {
   return (
     <View>
       
-      {users?.map((row, idx) => {
+      {users?.map((row) => {
         return (
             <Pressable onPress={()=>navigation.navigate("MemoDetail",{
                 title:row.title,
                 text:row.text,
+                id:row.id,
             })}>
         <Text>{row.title}{row.text}</Text>
         </Pressable>);
