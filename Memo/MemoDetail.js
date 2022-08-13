@@ -13,14 +13,28 @@ const MemoDetail = ({route, navigation}) => {
 
     const UpdateDB = async () => {
         try {
-          const rows = await usersCollection.where('name', '==',title);
+          const rows = await usersCollection.where('title', '==',title, "AND", "email","==",email);
           rows.get().then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
-              doc.ref.update({ title: title });
-              doc.ref.update({ text: text });
+              doc.update({ title: title, text:text });
             });
           });
           console.log('Update Complete!', rows);
+        } catch (error) {
+          console.log(error.message);
+        }
+      };
+      const addCollection = firestore().collection('users');
+      const DeleteDB = async () => {
+        try {
+          //   await addCollection.doc('').delete();
+          const rows = await addCollection.where('title', '==', title);
+          rows.get().then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+              doc.ref.delete();
+            });
+          });
+          console.log('Delete Complete!', rows);
         } catch (error) {
           console.log(error.message);
         }
@@ -30,7 +44,7 @@ const MemoDetail = ({route, navigation}) => {
         <View>
             <TextInput value={title} onChangeText={setTitle}/>
             <TextInput value={text} onChangeText={setText}/>
-            <Button onPress={UpdateDB} title="수정"/><Button title="삭제"/>
+            <Button onPress={UpdateDB} title="수정"/><Button onPress={DeleteDB} title="삭제"/>
 
         </View>
     );

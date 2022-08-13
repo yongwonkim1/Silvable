@@ -29,7 +29,7 @@ function MemoView({navigation}) {
                 title:row.title,
                 text:row.text,
             })}>
-        <Text>{row.title}</Text>
+        <Text>{row.title}{row.text}</Text>
         </Pressable>);
       })}
     </View>
