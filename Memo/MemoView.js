@@ -19,9 +19,13 @@ function MemoView({navigation}) {
       console.log(error.message);
     }
   };
+
+  useEffect(()=>{
+    _callApi();
+  })
+
   return (
     <View>
-      <Button title="데이터 불러오기" onPress={_callApi}/>
       
       {users?.map((row, idx) => {
         return (
