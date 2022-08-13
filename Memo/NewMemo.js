@@ -1,9 +1,9 @@
-import React, { useState,useContext } from 'react';
-import { View, TextInput, Button, Pressable, StyleSheet,Text } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { View, TextInput, Button, Pressable, StyleSheet, Text } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import { UserContext } from "../contexts";
 
-const NewMemo = ({navigation}) => {
+const NewMemo = ({ navigation }) => {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const addCollection = firestore().collection('memo');
@@ -14,11 +14,11 @@ const NewMemo = ({navigation}) => {
   const addText = async () => {
     try {
       await addCollection.add({
-        email : email,
+        email: email,
         uid: uid,
         title: title,
         text: text,
-        date : Date.now(),
+        date: Date.now(),
       });
       setTitle('');
       setText('');
@@ -30,16 +30,16 @@ const NewMemo = ({navigation}) => {
   };
   // ...
   return (
-    
+
     <View style={[styles.container]}>
       <View style={[styles.date]}>
-      <TextInput style={[styles.title]} value={title} onChangeText={setTitle} placeholder="제목을 입력해주세요" multiline={true}/>
+        <TextInput style={[styles.title]} value={title} onChangeText={setTitle} placeholder="제목을 입력해주세요" multiline={true} />
       </View>
       <View style={[styles.text]}>
-        <TextInput value={text} onChangeText={setText} placeholder="내용을 입력해주세요" multiline={true} style={[styles.input]}/>
+        <TextInput value={text} onChangeText={setText} placeholder="내용을 입력해주세요" multiline={true} style={[styles.input]} />
       </View>
       <Pressable title="저장" style={[styles.button]} onPress={addText}>
-        <Text style={{color:"white",fontSize:30}}>저장하기</Text>
+        <Text style={{ color: "white", fontSize: 30 }}>저장하기</Text>
       </Pressable>
     </View>
   );
@@ -51,46 +51,48 @@ const styles = StyleSheet.create({
   date: {
     flex: 1,
     backgroundColor: '#ced4da',
-    alignItems:'center',
-    justifyContent:'center'
+    alignItems: 'center',
+    justifyContent: 'center'
 
   },
   text: {
     flex: 10,
     backgroundColor: 'white',
-    justifyContent:'flex-start',
-    alignItems:'stretch'
+    justifyContent: 'flex-start',
+    alignItems: 'stretch'
   },
-  input:{
-    margin:20,
-    flexShrink:1,
-    height:300,
-    fontSize:30,
-    borderWidth:2,
-    borderColor:'black',
-    textAlignVertical:"top",
-    padding:20,
-    borderRadius:20,
-    borderColor:'#868e96'
+  input: {
+    color: 'black',
+    margin: 20,
+    flexShrink: 1,
+    height: 300,
+    fontSize: 30,
+    borderWidth: 2,
+    borderColor: 'black',
+    textAlignVertical: "top",
+    padding: 20,
+    borderRadius: 20,
+    borderColor: '#868e96'
   },
-  button:{
-    backgroundColor:'#50ce60',
-    flex:1,
-    justifyContent:'center',
-    alignItems:'center'
+  button: {
+    backgroundColor: '#50ce60',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  new:{
-    width:80,
-    height:80,
-    backgroundColor:'#ffdcff',
-    borderRadius:100,
-    alignItems:'center',
-    justifyContent:'center'
+  new: {
+    width: 80,
+    height: 80,
+    backgroundColor: '#ffdcff',
+    borderRadius: 100,
+    alignItems: 'center',
+    justifyContent: 'center'
 
 
   },
-  title:{
-  fontSize:20
+  title: {
+    fontSize: 20,
+    color: 'black',
   }
 })
 
