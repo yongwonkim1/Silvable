@@ -35,9 +35,15 @@ function MemoView({ navigation }) {
 
   return (
     <View style={{ flex: 1 }}>
-      <View style={{ flex: 0.04, color: 'black', marginTop: 10, alignItems: "center" }}>
-        <Text style={{ color: 'black', fontSize: 20 }}>아래로 당겨서 데이터 불러오기</Text>
+      <View style={{ flex: 0.07, color: 'black', marginTop: 10, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', margin: 5 }}>
+        <Text style={{ color: '#999999', fontSize: 20, marginRight: 10 }}>아래로 당겨서 데이터 불러오기</Text>
+        <Pressable
+          style={{ alignItems: 'flex-end', }}
+        >
+          <Text style={{ fontSize: 30, color: 'black', backgroundColor: "skyblue", borderRadius: 10, padding: 5 }}>메모 추가</Text>
+        </Pressable>
       </View>
+
       <ScrollView
         style={{ flex: 1 }}
         refreshControl={
