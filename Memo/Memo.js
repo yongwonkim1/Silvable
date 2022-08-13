@@ -51,7 +51,7 @@ export default function Memo() {
     }
 
     const naviGo = () => {
-        navigation.navigate("MemoWrite");
+        navigation.navigate("NewTitle");
     }
 
     const onDelete = async (event) => {

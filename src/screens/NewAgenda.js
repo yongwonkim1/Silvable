@@ -18,7 +18,7 @@ const [plan,setPlan] = useState(route.params?.text)
 useEffect(()=>{
   setPlan(route.params?.text)
 
-})
+},[route.params?.text])
 
   return (
     <View style={[styles.container]}>
@@ -28,14 +28,21 @@ useEffect(()=>{
         </Text>
       </View>
       <View style={[styles.text]}>
-        <TextInput value={plan} onChange={setPlan} placeholder="내용을 입력해주세요" multiline={true} style={[styles.input]}></TextInput>
+        <TextInput value={plan} onChangeText={setPlan} placeholder="내용을 입력해주세요" multiline={true} style={[styles.input]}></TextInput>
       </View>
-      <Button title="음성인식" onPress={()=>navigation.navigate('Stt',{
-          back:'NewAgenda',
-          merge: true,})}/>
+      
       <Pressable title="저장" style={[styles.button]} onPress={()=>navigation.goBack()}>
         <Text style={{color:"white",fontSize:30}}>저장하기</Text>
       </Pressable>
+      <View style={{position:'absolute', top:0, left:0, bottom:80, right:10, justifyContent:'flex-end', alignItems:'flex-end'}}>
+        <Pressable onPress={()=>navigation.navigate('Stt',{
+          back:'NewAgenda',
+          merge: true,})}>
+          <View style={[styles.new]}>
+            <Image style={{margin:10,flex:1,resizeMode:'contain'}}source={require('./assets/mic.png')}/>
+          </View>
+        </Pressable>
+      </View>
     </View>
   );
 };
@@ -74,6 +81,16 @@ const styles = StyleSheet.create({
     flex:1,
     justifyContent:'center',
     alignItems:'center'
+  },
+  new:{
+    width:80,
+    height:80,
+    backgroundColor:'#ffdcff',
+    borderRadius:100,
+    alignItems:'center',
+    justifyContent:'center'
+
+
   }
 
 })

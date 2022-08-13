@@ -229,8 +229,8 @@ class Stt extends Component<Props, State> {
      <View style={{flex:1, flexDirection:'row'}}>
       
        <View style={{flex:2, flexDirection:'column'}}>
-          <View style={{flex:1, backgroundColor:'#ccff90'}}></View>
-           <View style={{flex:1, justifyContent:'center', alignItems:'center', backgroundColor:'#33691e'}}>
+          <View style={{flex:1, backgroundColor:'#fff0f5'}}></View>
+           <View style={{flex:1, justifyContent:'center', alignItems:'center', backgroundColor:'#ffbec3'}}>
            {this.state.partialResults.map((result, index) => {
           return (
             <Text key={`partial-result-${index}`} style={styles.show}>
@@ -268,7 +268,7 @@ class Stt extends Component<Props, State> {
 const styles = StyleSheet.create({
     half:{width:200, height:200, bottom:100, right:90, position:'absolute',backgroundColor:'white'},
    box:{backgroundColor:'white',
-   borderColor:'#33691e',
+   borderColor:'#ffbec3',
    borderWidth:4, 
    width:300,
    height:300, 

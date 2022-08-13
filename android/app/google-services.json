@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "70845834434",
+    "project_id": "sinabeuro-40e61",
+    "storage_bucket": "sinabeuro-40e61.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:70845834434:android:dc5c4fbf6df639c256475b",
+        "android_client_info": {
+          "package_name": "com.sinabeuro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "70845834434-ccmc4u9fi4r588n7577n81bmfudh94ki.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sinabeuro",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "70845834434-fe5sm0prcqasih2q6hn6ohvbi8al72a6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7nRB1TGF0UhQfnIdpAlZkQwLQPhvmH4E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "70845834434-fe5sm0prcqasih2q6hn6ohvbi8al72a6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

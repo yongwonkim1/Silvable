@@ -22,7 +22,7 @@ const Home = ({ navigation }) => {
         <Image style={{height:150, widht:150, resizeMode:'contain'}} source={require('./assets/logo.png')}/>
       </View>
       <View style={[styles.subCon]}>
-        <Pressable style={[styles.element, { flex: 3, backgroundColor: '#19ce60' }]}
+        <Pressable style={[styles.element, { flex: 2, backgroundColor: '#ffe3ee' }]}
           onPress={() => navigation.navigate('MapToHome')}
           onLongPress={() => {
             setLetter("집으로 길안내");
@@ -34,24 +34,24 @@ const Home = ({ navigation }) => {
         <Pressable style={[styles.element, { flex: 2, backgroundColor: 'white' }]}
           onPress={() => navigation.navigate('Hospital')}
           onLongPress={() => {
-            setLetter("병원");
+            setLetter("병원 안내");
             onPressRead()
           }}>
           <Image style={[styles.eleImg]} source={require('./assets/병원.png')}></Image>
-          <Text style={[styles.eleText]}>병원찾기</Text>
+          <Text style={[styles.eleText]}>병원 안내</Text>
         </Pressable>
       </View>
       <View style={[styles.subCon]}>
-        <Pressable style={[styles.element, { flex: 3, backgroundColor: 'white' }]}
+        <Pressable style={[styles.element, { flex: 2, backgroundColor: 'white' }]}
           onPress={() => navigation.navigate('MapToPolice')}
           onLongPress={() => {
-            setLetter("가까운 경찰서");
+            setLetter("경찰서 안내");
             onPressRead()
           }}>
           <Image style={[styles.eleImg]} source={require('./assets/경찰.png')}></Image>
-          <Text style={[styles.eleText]}>가까운 경찰서</Text>
+          <Text style={[styles.eleText]}>경찰서 안내</Text>
         </Pressable>
-        <Pressable style={[styles.element, { flex: 2, backgroundColor: '#b5e61d' }]} onPress={() => navigation.navigate('Stt',
+        <Pressable style={[styles.element, { flex: 2, backgroundColor: '#ffcad5' }]} onPress={() => navigation.navigate('Stt',
           {
           back:'Home',
         })}
@@ -59,12 +59,12 @@ const Home = ({ navigation }) => {
             setLetter("메모장");
             onPressRead()
           }}>
-          <Image style={[styles.eleImg]} source={require('./assets/음성인식.png')}></Image>
+          <Image style={[styles.eleImg]} source={require('./assets/메모장.png')}></Image>
           <Text style={[styles.eleText]}>메모장</Text>
         </Pressable>
       </View>
       <View style={[styles.subCon]}>
-        <Pressable style={[styles.element, { flex: 3, backgroundColor: '#87f8c8' }]}
+        <Pressable style={[styles.element, { flex: 2, backgroundColor: '#ffc8cd' }]}
           onPress={() => navigation.navigate('Login')}
           onLongPress={() => {
             setLetter("정보수정");
@@ -76,11 +76,11 @@ const Home = ({ navigation }) => {
         <Pressable style={[styles.element, { flex: 2, backgroundColor: 'white' }]}
           onPress={() => navigation.navigate('Agenda')}
           onLongPress={() => {
-            setLetter("달력");
+            setLetter("일정 관리");
             onPressRead()
           }}>
           <Image style={[styles.eleImg]} source={require('./assets/달력.png')}></Image>
-          <Text style={[styles.eleText]}>달력</Text>
+          <Text style={[styles.eleText]}>일정 관리</Text>
         </Pressable>
       </View>
       <View style={{ height: 100 }}>
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 2,
-    backgroundColor: '#f5f5f5'
+    backgroundColor: '#fff0f5'
 
   },
   subCon: {
@@ -133,14 +133,14 @@ const styles = StyleSheet.create({
     margin: 10,
     padding: 15,
     flex: 1,
-    shadowColor: 'gray',
+    shadowColor: 'black',
     shadowOffset: {
       width: 5,
       height: 5
     },
     shadowOpacity: 0.5,
     shadowRadius: 5,
-    elevation: 20,  // 안드로이드용 그림자
+    elevation: 10,  // 안드로이드용 그림자
   },
   eleImg: {
     height: 50,

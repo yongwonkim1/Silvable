@@ -13,6 +13,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		4B66B773FD0EA41F9C8C737F /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906AE5053A2AA9E7A8FD33F5 /* ExpoModulesProvider.swift */; };
 		539221D2289815F500289EAF /* BridgingFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539221D1289815F500289EAF /* BridgingFile.swift */; };
+		53EC81BA28A6591F00FB9CCE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 53EC81B928A6591F00FB9CCE /* GoogleService-Info.plist */; };
 		640718B52E04A6C1BCC127DE /* libPods-Sinabeuro-SinabeuroTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C60187EB3F3B127DE9590830 /* libPods-Sinabeuro-SinabeuroTests.a */; };
 		7C348AF9BF90E00515B8EE19 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56420272FAFB2DA5A20458F /* ExpoModulesProvider.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -41,6 +42,7 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Sinabeuro/main.m; sourceTree = "<group>"; };
 		539221D0289815F400289EAF /* Sinabeuro-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sinabeuro-Bridging-Header.h"; sourceTree = "<group>"; };
 		539221D1289815F500289EAF /* BridgingFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgingFile.swift; sourceTree = "<group>"; };
+		53EC81B928A6591F00FB9CCE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Sinabeuro/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		85EC8A99007F76CA1535F8FE /* Pods-Sinabeuro-SinabeuroTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sinabeuro-SinabeuroTests.debug.xcconfig"; path = "Target Support Files/Pods-Sinabeuro-SinabeuroTests/Pods-Sinabeuro-SinabeuroTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8AADF7CDAA7C7846D6928574 /* Pods-Sinabeuro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sinabeuro.release.xcconfig"; path = "Target Support Files/Pods-Sinabeuro/Pods-Sinabeuro.release.xcconfig"; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
+				53EC81B928A6591F00FB9CCE /* GoogleService-Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
@@ -279,6 +282,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				53EC81BA28A6591F00FB9CCE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

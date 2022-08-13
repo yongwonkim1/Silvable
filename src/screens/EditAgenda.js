@@ -29,12 +29,10 @@ const App = ({navigation,route}) => {
         </Text>
       </View>
       <View style={[styles.text]}>
-        <TextInput value={plan} va onChangeText={setPlan} multiline={true} style={[styles.input]}></TextInput> 
+        <TextInput value={plan}  onChangeText={setPlan} multiline={true} style={[styles.input]}></TextInput> 
       </View>
       <View style={[styles.button]}>
-        <Button title="음성인식" onPress={()=>navigation.navigate('Stt',{
-          back:'EditAgenda',
-          merge: true,})}/>
+        
       <Pressable style={[styles.button2]} onPress={()=>navigation.goBack()}>
         <Text style={{marginTop:10,flex:1,color:"white",fontSize:30}}>수정</Text>
         {/*파이어베이스 수정추가*/}
@@ -43,6 +41,15 @@ const App = ({navigation,route}) => {
         <Text style={{marginTop:10,flex:1, color:"white",fontSize:30}}>삭제</Text>
         {/*파이어베이스 삭제추가*/}
       </Pressable>
+      </View>
+      <View style={{position:'absolute', top:0, left:0, bottom:80, right:10, justifyContent:'flex-end', alignItems:'flex-end'}}>
+        <Pressable onPress={()=>navigation.navigate('Stt',{
+          back:'EditAgenda',
+          merge: true,})}>
+          <View style={[styles.new]}>
+            <Image style={{margin:10,flex:1,resizeMode:'contain'}}source={require('./assets/mic.png')}/>
+          </View>
+        </Pressable>
       </View>
     </View>
   );
@@ -78,7 +85,7 @@ const styles = StyleSheet.create({
     borderColor:'#868e96',
   },
   button:{
-    backgroundColor:'#50ce60',
+    backgroundColor:'#ffb0cf',
     flex:1,
     flexDirection:'row'
   },
@@ -91,7 +98,17 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center',
     flex:1,
-    backgroundColor:'orange'
+    backgroundColor:'#becdff'
+  },
+  new:{
+    width:80,
+    height:80,
+    backgroundColor:'#ffdcff',
+    borderRadius:100,
+    alignItems:'center',
+    justifyContent:'center'
+
+
   }
 
 

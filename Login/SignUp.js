@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
-import { Text } from 'react-native';
+import { Text} from 'react-native';
 import styled from 'styled-components/native';
 import { Image, Input, Button } from '../Components';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -9,12 +9,12 @@ import { useNavigation } from '@react-navigation/native';
 
 //파이어베이스 회원가입 
 import { Alert } from 'react-native';
-import { signup } from '../utils/firebase';
-import { dbService } from '../utils/firebase';
-import { addDoc, collection } from 'firebase/firestore';
+import { signUp } from '../lib/auth';
+// import { dbService } from '../utils/firebase';
+// import { addDoc, collection } from 'firebase/firestore';
 
 
-import * as firestore from 'firebase/firestore';
+// import * as firestore from 'firebase/firestore';
 
 const Container = styled.View`
   flex: 1;
@@ -34,7 +34,7 @@ const ErrorText = styled.Text`
 
 
 
-const Signup = ( ) => {
+const SignUp = ( ) => {
 
   const navigation = useNavigation();
   
@@ -75,21 +75,30 @@ const Signup = ( ) => {
     );
   }, [email, password, passwordConfirm, errorMessage]);
 
-  const _handleSignupButtonPress = async() => {
-    try{
-      const user = await signup({email, password});
-      await addDoc(collection(dbService,"Users"),{
-        signupCreatedAt:Date.now(),
-        creatorId : user.uid,
-    })
-      // console.log(user);
-      Alert.alert('회원가입 성공', user.email);
-      navigation.navigate("Login");
+  // const _handleSignupButtonPress = async() => {
+  //   try{
+  //     const user = await signup({email, password});
+  //     await addDoc(collection(dbService,"Users"),{
+  //       signupCreatedAt:Date.now(),
+  //       creatorId : user.uid,
+  //   })
+  //     // console.log(user);
+  //     Alert.alert('회원가입 성공', user.email);
+  //     navigation.navigate("Login");
 
+  //   } catch (e) {
+  //     Alert.alert('회원가입 실패', e.message);
+  //   }
+  // };
+  const signUpSubmit = async () => { // 회원가입 함수
+    const info = { email, password };
+    try {
+        const { user } = await signUp(info);
+        console.log(user);
+        navigation.navigate("Login")
     } catch (e) {
-      Alert.alert('회원가입 실패', e.message);
-    }
-  };
+        Alert.alert("회원가입에 실패하였습니다.");
+    }}
 
   //화면 스크롤,, 잘은 모르지만 이렇게 하는거래서 함 ㅎㅎ
   return (
@@ -115,7 +124,7 @@ const Signup = ( ) => {
         <Input ref={passwordConfirmRef} label="Password Confirm"
           value={passwordConfirm}
           onChangeText={text => setPasswordConfirm(removeWhitespace(text))}
-          onSubmitEditing={_handleSignupButtonPress}
+          onSubmitEditing={signUpSubmit}
           placeholder="비밀번호 확인"
           returnKeyType="done"
           isPassword
@@ -124,7 +133,7 @@ const Signup = ( ) => {
         <ErrorText>{errorMessage}</ErrorText>
 
         <Button title="Signup"
-          onPress={_handleSignupButtonPress}
+          onPress={signUpSubmit}
           disabled={disabled}
         />
       </Container>
@@ -132,4 +141,4 @@ const Signup = ( ) => {
   );
 };
 
-export default Signup;
+export default SignUp;

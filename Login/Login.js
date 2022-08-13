@@ -17,6 +17,7 @@ import { Alert } from "react-native";
 import { login } from "../utils/firebase";
 import * as firestore from 'firebase/firestore';
 import { UserContext } from '../contexts';
+import { signIn} from "../lib/auth";
 
 
 
@@ -76,23 +77,36 @@ const Login = ({ navigation }) => {
   };
 
   //spinner 사용안하는 방향으로 가야겠네ㅋㅋ  아~남 사용하기~~~로딩중 나타남
-  const _handleLoginButtonPress = async () => {
-    try {
-      // spinner.start();
-      const user = await login({ email, password });
-      Alert.alert("로그인 성공", user.email);
-      dispatch(user);
-      navigation.reset({
-        routes: [{ name: "Memo", params: { email, password } }],
-      }); //stack 초기화->뒤로가기 눌러도 로그인페이지로 다시 이동하지 않게 함
-    } catch (e) {
-      Alert.alert("로그인 살패", e.message);
-    } finally {
-      // spinner.stop()
+  // const _handleLoginButtonPress = async () => {
+  //   try {
+  //     // spinner.start();
+  //     const user = await login({ email, password });
+  //     Alert.alert("로그인 성공", user.email);
+  //     dispatch(user);
+  //     navigation.reset({
+  //       routes: [{ name: "Memo", params: { email, password } }],
+  //     }); //stack 초기화->뒤로가기 눌러도 로그인페이지로 다시 이동하지 않게 함
+  //   } catch (e) {
+  //     Alert.alert("로그인 살패", e.message);
+  //   } finally {
+  //     // spinner.stop()
       
+  //   }
+  // };
+  const signInSubmit = async () => { // 로그인 함수
+    const info = {email, password};
+    try {
+      const {user} = await signIn(info);
+      dispatch(user)
+      console.log(user);
+      navigation.reset({
+              routes: [{ name: "NewMemo"}],
+             });
+    } catch (e) {
+      Alert.alert("로그인에 실패하였습니다.");
     }
-  };
-
+  }
+  //, params: { email, password } 
   //키보드 감추기를 위한 keyboardawarescrollview 라이브러리 => 입력 도중 다른 영역을 터지 하면 키보드 사라지고, 스크롤 이동되는 것 가능
   return (
     <KeyboardAwareScrollView
@@ -116,7 +130,7 @@ const Login = ({ navigation }) => {
           label="Password"
           value={password}
           onChangeText={_handlePasswordChange}
-          onSubmitEditing={_handleLoginButtonPress}
+          onSubmitEditing={signInSubmit}
           placeholder="비밀번호를 입력해주세요"
           returnKeyType="done"
           isPassword
@@ -125,12 +139,12 @@ const Login = ({ navigation }) => {
         <ErrorText>{errorMessage}</ErrorText>
         <Button
           title="로그인"
-          onPress={_handleLoginButtonPress}
+          onPress={signInSubmit}
           disabled={disabled}
         />
         <Button
           title="이메일로 가입하기"
-          onPress={() => navigation.navigate("Signup")}
+          onPress={() => navigation.navigate("SignUp")}
           isFilled={false}
         />
       </Container>

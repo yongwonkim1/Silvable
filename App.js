@@ -1,17 +1,3 @@
-// import React from 'react';
-// import { NavigationContainer } from '@react-navigation/native';
-// import StackNavigation from './stack/Stack';
-
-// const App = () => {
-//     return (
-//         <NavigationContainer>
-//             <StackNavigation />
-//         </NavigationContainer>
-//     )
-// }
-
-// export default App;
-
 
 import React from 'react';
 
@@ -25,8 +11,9 @@ import { UserProvider } from './contexts';
 
 import { theme } from './theme';
 import Login from './Login/Login';
-import Signup from './Login/Singup';
+import SignUp from './Login/SignUp';
 import Memo from './Memo/Memo';
+import NewMemo from './Memo/NewMemo';
 import MemoWrite from './Memo/MemoWrite';
 import MemoContent from './Memo/MemoContent';
 import Home from './src/screens/Home';
@@ -40,6 +27,8 @@ import Magnify from './src/screens/Magnify';
 import Agenda from './src/screens/Agenda';
 import EditAgenda from './src/screens/EditAgenda';
 import NewAgenda from './src/screens/NewAgenda';
+import MemoView from './Memo/MemoView';
+import MemoDetail from './Memo/MemoDetail';
 
 const Stack = createStackNavigator();
 
@@ -50,14 +39,16 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Home"
+            initialRouteName="Login"
             screenOptions={{
               headerShown: true,
             }}
           >
             <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Signup" component={Signup} />
+            <Stack.Screen name="SignUp" component={SignUp} />
             <Stack.Screen name="Memo" component={Memo} />
+            <Stack.Screen name="NewMemo" component={NewMemo} />
+            <Stack.Screen name="MemoView" component={MemoView}/>
             <Stack.Screen name="MemoWrite" component={MemoWrite} />
             <Stack.Screen name="MemoContent" component={MemoContent} />
             <Stack.Screen name="Home" component={Home} />
@@ -71,6 +62,7 @@ export default function App() {
             <Stack.Screen name="Agenda" component={Agenda} />
             <Stack.Screen name="NewAgenda" component={NewAgenda} />
             <Stack.Screen name="EditAgenda" component={EditAgenda} />
+            <Stack.Screen name="MemoDetail" component={MemoDetail} />
           </Stack.Navigator>
         </NavigationContainer>
       </ThemeProvider>
@@ -87,3 +79,45 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+// import React, { useState } from 'react';
+// import { View, TextInput, Button } from 'react-native';
+// import firestore from '@react-native-firebase/firestore';
+
+// const App = () => {
+//   const [addName, setAddName] = useState('');
+//   const [addAge, setAddAge] = useState('');
+//   const addCollection = firestore().collection('users');
+
+//   const addText = async () => {
+//     try {
+//       await addCollection.add({
+//         name: addName,
+//         age: addAge,
+//       });
+//       setAddName('');
+//       setAddAge('');
+//       console.log('Create Complete!');
+//     } catch (error) {
+//       console.log(error.message);
+//     }
+//   };
+//   // ...
+//   return (
+//     <View>
+//       {/* ... */}
+//       <TextInput
+//         placeholder="name"
+//         value={addName}
+//         onChangeText={setAddName}
+//       />
+//       <TextInput
+//         placeholder="age"
+//         value={addAge}
+//         onChangeText={setAddAge}
+//       />
+//       <Button title="Add Text" onPress={addText} />
+//     </View>
+//   );
+// };
+
+// export default App;
