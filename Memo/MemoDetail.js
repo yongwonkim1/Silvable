@@ -4,6 +4,7 @@ import firestore from '@react-native-firebase/firestore';
 import { UserContext } from "../contexts";
 import { userCollection } from '../lib/user';
 import { useNavigation } from '@react-navigation/native';
+import { async } from '@firebase/util';
 
 const MemoDetail = ({route, navigation}) => {
     const userEmail = useContext(UserContext);
@@ -14,7 +15,10 @@ const MemoDetail = ({route, navigation}) => {
     const [id,setId] = useState(route.params?.id);
     const addCollection = firestore().collection('memo');
 
+    
+
     const navigation2 = useNavigation();
+
     
     const UpdateDB = async () => {
       await firestore().collection("memo").doc(id).update({
