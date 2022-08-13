@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, Text, View, Button,Pressable,TouchableHighlight} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import { UserContext } from "../contexts";
@@ -22,18 +22,15 @@ function MemoView({navigation}) {
   return (
     <View>
       <Button title="데이터 불러오기" onPress={_callApi}/>
+      
       {users?.map((row, idx) => {
         return (
-            <TouchableHighlight style={{marginTop:40}} onPress={navigation.navigate("MemoDetail",
-            {
+            <Pressable onPress={()=>navigation.navigate("MemoDetail",{
                 title:row.title,
                 text:row.text,
-            }
-            )}>
-             <Text>{row.title}</Text>
-             <Text>{row.text}</Text>
-            </TouchableHighlight>
-        );
+            })}>
+        <Text>{row.title}</Text>
+        </Pressable>);
       })}
     </View>
   );
