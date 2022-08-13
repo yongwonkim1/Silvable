@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Button,Pressable,TextInput, Alert } from 'react
 import firestore from '@react-native-firebase/firestore';
 import { UserContext } from "../contexts";
 import { userCollection } from '../lib/user';
+import { useNavigation } from '@react-navigation/native';
 
 const MemoDetail = ({route, navigation}) => {
     const userEmail = useContext(UserContext);
@@ -13,20 +14,27 @@ const MemoDetail = ({route, navigation}) => {
     const [id,setId] = useState(route.params?.id);
     const addCollection = firestore().collection('memo');
 
-    console.log(id);
-
+    const navigation2 = useNavigation();
     
     const UpdateDB = async () => {
       await firestore().collection("memo").doc(id).update({
         title: title,
         text: text,
       })
+
+      naviGo();
+    }
+
+    const naviGo = () => {
+      navigation2.navigate("MemoView");
     }
     
     const DeleteDB = async () => {
       
       console.log("삭제버튼 클릭");
       await firestore().collection("memo").doc(id).delete();
+      naviGo();
+      
     };
 
     const alertDelete = () => {
