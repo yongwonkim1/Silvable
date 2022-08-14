@@ -1,8 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Pressable, RefreshControl, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, Pressable, TouchableHighlight, ScrollView, RefreshControl, Image, Alert } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import { UserContext } from "../contexts";
-import { ScrollView } from 'react-native';
 
 function MemoView({ navigation }) {
   const [users, setUsers] = useState();
@@ -12,16 +11,27 @@ function MemoView({ navigation }) {
   const uid = userEmail.user.uid;
   const addCollection = firestore().collection('memo');
 
+  const [getContent, setGetContent] = useState([]);
+
+  const [getSecondEmail, setGetSecondEmail] = useState("");
+
   const wait = (timeout) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
   }
   const _callApi = async () => {
     try {
-      const data = await usersCollection.where("email", "==", email).get();
-      setUsers(data._docs.map(doc => ({ ...doc.data(), id: doc.id })));
-      console.log(users);
+      //const data = await usersCollection.where("email","==",email).orderBy("date","desc").get();
+      firestore().collection("memo").orderBy("date", "desc").onSnapshot((snapshot) => {
+        const data = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setGetContent(data);
+      })
+      //setUsers(data._docs.map(doc => ({ ...doc.data(), id: doc.id })));
+
     } catch (error) {
-      console.log(error.message);
+
     }
   };
 
@@ -33,7 +43,31 @@ function MemoView({ navigation }) {
     wait(1000).then(() => setRefreshing(false));
   }, []);
 
+  const getUserDoc = async () => {
+
+    const docRef = await firestore().collection('users').get();
+
+    const data = docRef.docs.map(doc => ({
+      ...doc.data(),
+      id: doc.id
+    }))
+
+    data.map((doc) => {
+      if (doc.creatorId == uid) {
+        setGetSecondEmail(doc.secondId);
+      }
+    })
+
+  }
+
+  useEffect(() => {
+    _callApi();
+
+    getUserDoc();
+  })
+
   return (
+
     <View style={{ flex: 1 }}>
       <View style={{ flex: 0.07, color: 'black', marginTop: 10, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', margin: 5 }}>
         <Text style={{ color: '#999999', fontSize: 20, marginRight: 10 }}>아래로 당겨서 데이터 불러오기</Text>
@@ -44,6 +78,16 @@ function MemoView({ navigation }) {
         </Pressable>
       </View>
 
+      {/*  users?.map((row) => {
+        return (
+            <Pressable onPress={()=>navigation.navigate("MemoDetail",{
+                title:row.title,
+                text:row.text,
+                id:row.id,
+            })}>
+        <Text>{row.title}{"\n"}{row.text}{"\n"}{row.email}</Text>
+        </Pressable>);
+      })  */}
       <ScrollView
         style={{ flex: 1 }}
         refreshControl={
@@ -52,48 +96,57 @@ function MemoView({ navigation }) {
             onRefresh={onRefresh}
           />
         }>
-        {users?.map((row, idx) => {
-          return (
-
-            <View style={styles.memoContainer}>
-              <View style={{ flex: 5 }}>
-                <Text style={{ fontSize: 50, color: 'black' }}>{row.title}</Text>
-                <Text style={{ fontSize: 30, color: '#555555' }}>{row.text}</Text>
-              </View>
-              <View style={{ flex: 1 }}>
-                <Pressable
-                  style={{ flex: 1 }}
-                  onPress={() => navigation.navigate("MemoDetail", {
-                    title: row.title,
-                    text: row.text,
-                  })}>
-                  <Image source={require('./assets/edit.png')} style={{ width: '100%', height: '100%' }} />
-                </Pressable>
-                <Pressable
-                  style={{ flex: 1 }}
-                  onPress={() => {
-                    try {
-                      //   await addCollection.doc('').delete();
-                      const rows = addCollection.where('title', '==', row.title);
-                      rows.get().then(function (querySnapshot) {
-                        querySnapshot.forEach(function (doc) {
-                          doc.ref.delete();
-                        });
-                      });
-                      console.log('Delete Complete!', rows);
-                      onRefresh();
-                    } catch (error) {
-                      console.log(error.message);
+        {
+          getContent.map((content) => uid == content.uid || getSecondEmail == content.email ? (
+            <>
+              <View style={styles.memoContainer}>
+                <View style={{ flex: 5 }}>
+                  <Text style={{ fontSize: 50, color: 'black' }}>{content.title}</Text>
+                  <Text style={{ fontSize: 30, color: '#555555' }}>{content.text}</Text>
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Pressable
+                    style={{ flex: 1 }}
+                    onPress={() => navigation.navigate("MemoDetail", {
+                      title: row.title,
+                      text: row.text,
+                      id: content.id,
+                    })}>
+                    <Image source={require('./assets/edit.png')} style={{ width: '100%', height: '100%' }} />
+                  </Pressable>
+                  <Pressable
+                    style={{ flex: 1 }}
+                    onPress={() => {
+                      Alert.alert("삭제", "메모를 삭제할까요?", [{
+                        text: "아니요",
+                        onPress: () => { },
+                        style: "cancel",
+                      }, {
+                        text: "예",
+                        onPress:
+                          () => {
+                            console.log("삭제버튼 클릭");
+                            firestore().collection("memo").doc(content.id).delete();
+                            getUserDoc();
+                          },
+                      }],
+                        { cancelable: false, onDismiss: () => { } });
+                      //await deleteDoc(doc(dbService, 'Memos', memoObj.id));
                     }
-                  }}
-                >
-                  <Image source={require('./assets/delete.png')} style={{ width: '100%', height: '100%' }} />
-                </Pressable>
+                    }
+                  >
+                    <Image source={require('./assets/delete.png')} style={{ width: '100%', height: '100%' }} />
+                  </Pressable>
+                </View>
               </View>
-            </View>);
-        })}
+            </>
+          )
+            : null
+          )
+        }
       </ScrollView>
     </View >
+
   );
 }
 
@@ -118,4 +171,3 @@ const styles = StyleSheet.create({
 })
 
 export default MemoView;
-
