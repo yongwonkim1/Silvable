@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
-import { Text} from 'react-native';
+import { Text } from 'react-native';
 import styled from 'styled-components/native';
 import { Image, Input, Button } from '../Components';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -36,10 +36,10 @@ const ErrorText = styled.Text`
 
 
 
-const SignUp = ( ) => {
+const SignUp = () => {
 
   const navigation = useNavigation();
-  
+
   const [email, setEmail] = useState('');
   const [email2, setEmail2] = useState('');
   const [password, setPassword] = useState('');
@@ -57,31 +57,31 @@ const SignUp = ( ) => {
     let _errorMessage = '';
     if (!validateEmail(email)) {
       _errorMessage = '이메일을 입력해주세요';
-    } 
+    }
 
-    if (!validateEmail(email2)) {
+    else if (!validateEmail(email2)) {
       _errorMessage = '보호자,노인 이메일을 입력해주세요(필수x)';
-    } 
+    }
 
     else if (password.length < 8) {
       _errorMessage = '비밀번호는 최소 8자 이상이어야 합니다';
-    } 
-    
+    }
+
     else if (password !== passwordConfirm) {
       _errorMessage = '비밀번호가 일치하지 않습니다';
-    } 
-    
+    }
+
     else {
       _errorMessage = '';
     }
     setErrorMessage(_errorMessage);
-  } , [email,email2, password, passwordConfirm]);
+  }, [email, email2, password, passwordConfirm]);
 
-useEffect(() => {
-  setDisabled(
-    !(email && email2 && password && passwordConfirm && !errorMessage)
-  );
-}, [email,email2, password, passwordConfirm, errorMessage]);
+  useEffect(() => {
+    setDisabled(
+      !(email && email2 && password && passwordConfirm && !errorMessage)
+    );
+  }, [email, email2, password, passwordConfirm, errorMessage]);
 
   // const _handleSignupButtonPress = async() => {
   //   try{
@@ -101,21 +101,22 @@ useEffect(() => {
   const signUpSubmit = async () => { // 회원가입 함수
     const info = { email, password };
     try {
-        const { user } = await signUp(info);
-        console.log(user);
-        navigation.navigate("Login")
-        await firestore().collection("users").add({
-          signupCreatedAt:Date.now(),
-        creatorId : user.uid,
-        secondId : email2,
-        })
+      const { user } = await signUp(info);
+      console.log(user);
+      navigation.navigate("Login")
+      await firestore().collection("users").add({
+        signupCreatedAt: Date.now(),
+        creatorId: user.uid,
+        secondId: email2,
+      })
     } catch (e) {
-        Alert.alert("회원가입에 실패하였습니다.");
-    }}
+      Alert.alert("회원가입에 실패하였습니다.");
+    }
+  }
 
   //화면 스크롤,, 잘은 모르지만 이렇게 하는거래서 함 ㅎㅎ
   return (
-    <KeyboardAwareScrollView> 
+    <KeyboardAwareScrollView>
       <Container>
         <Input ref={emailRef} label="Email"
           value={email}
@@ -125,7 +126,8 @@ useEffect(() => {
           returnKeyType="next"
         />
 
-<Input ref={email2Ref} label="Email"
+
+        <Input ref={email2Ref} label="Email"
           value={email2}
           onChangeText={text => setEmail2(removeWhitespace(text))}
           onSubmitEditing={() => passwordRef.current.focus()}

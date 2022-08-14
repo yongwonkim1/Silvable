@@ -18,18 +18,18 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={[styles.container]}>
-      <View style={{ flex: 1, justifyContent:'center', alignItems:'center'}}>
-        <Image style={{height:150, widht:150, resizeMode:'contain'}} source={require('./assets/logo.png')}/>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Image style={{ height: 150, widht: 150, resizeMode: 'contain' }} source={require('./assets/logo.png')} />
       </View>
       <View style={[styles.subCon]}>
         <Pressable style={[styles.element, { flex: 2, backgroundColor: '#ffe3ee' }]}
           onPress={() => navigation.navigate('MapToHome')}
           onLongPress={() => {
-            setLetter("집으로 길안내");
+            setLetter("집으로 안내");
             onPressRead()
           }}>
           <Image style={[styles.eleImg]} source={require('./assets/집.png')}></Image>
-          <Text style={[styles.eleText]}>집으로 길안내</Text>
+          <Text style={[styles.eleText]}>집으로 안내</Text>
         </Pressable>
         <Pressable style={[styles.element, { flex: 2, backgroundColor: 'white' }]}
           onPress={() => navigation.navigate('Hospital')}
@@ -53,8 +53,8 @@ const Home = ({ navigation }) => {
         </Pressable>
         <Pressable style={[styles.element, { flex: 2, backgroundColor: '#ffcad5' }]} onPress={() => navigation.navigate('Stt',
           {
-          back:'Home',
-        })}
+            back: 'Home',
+          })}
           onLongPress={() => {
             setLetter("메모장");
             onPressRead()

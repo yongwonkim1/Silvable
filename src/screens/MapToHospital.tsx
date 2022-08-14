@@ -125,22 +125,14 @@ export default function MapToHospital({ route }: any) {
     }, []);
 
     return (
-
         <View style={{ flex: 1, alignItems: 'center' }}>
             <View style={{ flex: 1 }}>
-                <Text style={{ fontSize: 20, color: 'black' }}>가장 가까운 <Text style={{ fontWeight: '600' }}>{department}과</Text>를 검색합니다~</Text>
+                <Text style={{ fontSize: 20, color: 'black' }}>가장 가까운 <Text style={{ fontWeight: '600' }}>{department}과</Text>를 검색합니다.</Text>
                 <Pressable style={styles.hosName}
                     onPress={() => {
                         Linking.openURL(`https://search.naver.com/search.naver?where=nexearch&query=${name}`);
-                    }
-
-                    }>
+                    }}>
                     <Text style={{ fontSize: 40, fontWeight: "800", color: "#000066" }}>{name}</Text>
-
-                </Pressable>
-
-                <Pressable>
-
                 </Pressable>
             </View>
             <View style={{ flex: 8 }}>
