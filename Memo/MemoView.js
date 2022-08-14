@@ -108,8 +108,8 @@ function MemoView({ navigation }) {
                   <Pressable
                     style={{ flex: 1 }}
                     onPress={() => navigation.navigate("MemoDetail", {
-                      title: row.title,
-                      text: row.text,
+                      title: content.title,
+                      text: content.text,
                       id: content.id,
                     })}>
                     <Image source={require('./assets/edit.png')} style={{ width: '100%', height: '100%' }} />
