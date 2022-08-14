@@ -67,15 +67,16 @@ function MemoView({navigation}) {
       })  */}
 
       {
-        getContent.map((content)=> uid == content.uid || getSecondEmail == content.email ? (
+        getContent.map((content)=> uid == content.uid || getSecondEmail == content.email ? (<View key={content.id}>
           <Pressable onPress={()=>navigation.navigate("MemoDetail",{
             title:content.title,
             text:content.text,
             id:content.id,
+            email: content.email,
         })}>
     <Text>{content.title}{"\n"}{content.text}{"\n"}{content.email}</Text>
     </Pressable>
-        ): null
+        </View>): null
         )
       }
     </View>

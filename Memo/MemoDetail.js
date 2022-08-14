@@ -12,7 +12,17 @@ const MemoDetail = ({route, navigation}) => {
     const uid = userEmail.user.uid;
     const [title,setTitle] = useState(route.params?.title);
     const [text,setText] = useState(route.params?.text);
+    const [contentEmail, setContentEmail] = useState(route.params?.email);
     const [id,setId] = useState(route.params?.id);
+    const [isOwner, setIsOwner] = useState(false);
+
+    useEffect(()=>{
+      if(contentEmail == email){
+        setIsOwner(true);
+      }
+    },[])
+
+
     const addCollection = firestore().collection('memo');
 
     
@@ -58,7 +68,7 @@ const MemoDetail = ({route, navigation}) => {
         <View>
             <TextInput value={title} onChangeText={setTitle}/>
             <TextInput value={text} onChangeText={setText}/>
-            <Button  onPress={UpdateDB} title="수정"/><Button onPress={alertDelete} title="삭제"/>
+            {isOwner ? <View><Button  onPress={UpdateDB} title="수정"/><Button onPress={alertDelete} title="삭제"/></View> : null}
 
         </View>
     );
