@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text, Platform, PermissionsAndroid, ScrollView, Dimensions, TextInput, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, Platform, PermissionsAndroid, ScrollView, Pressable, Linking, Dimensions } from "react-native";
 
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import Geolocation from 'react-native-geolocation-service';
@@ -71,11 +71,11 @@ export default function MapToPolice({ }) {
         }
         setDestination({ latitude: parseFloat(data[minIndex].REFINE_WGS84_LAT), longitude: parseFloat(data[minIndex].REFINE_WGS84_LOGT) })
 
-        if (data[minIndex].NM) {
-            setName(data[minIndex].NM)  // 되는데 왜 빨간줄??
+        if ((data[minIndex].INST_NM).includes("경찰") || (data[minIndex].INST_NM).includes("지구")) {
+            setName(data[minIndex].INST_NM)
         }
         else if (data[minIndex].INST_NM) {
-            setName(data[minIndex].INST_NM)  // 되는데 왜 빨간줄??
+            setName(data[minIndex].INST_NM + data[minIndex].FACLT_DIV_NM)
         }
         setAddress(data[minIndex].REFINE_ROADNM_ADDR)
 
@@ -106,16 +106,20 @@ export default function MapToPolice({ }) {
 
 
     return (
-        <>
-            <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, alignItems: 'center' }}>
+            <View style={{ flex: 1, }}>
+                <Text style={{ fontSize: 20, color: 'black' }}>가장 가까운 경찰서를 검색합니다.</Text>
+                <Pressable style={styles.polName}
+                    onPress={() => {
+                        Linking.openURL(`https://search.naver.com/search.naver?where=nexearch&query=${name}`);
+                    }}>
+                    <Text style={{ fontSize: 40, fontWeight: "800", color: "#000066" }}>{name}</Text>
+                </Pressable>
+            </View>
+            <View style={{ flex: 8 }}>
                 {location ? (
                     <ScrollView style={{ flex: 1 }}>
                         <View style={{ flex: 1 }}>
-                            <Text style={styles.destinationName}>
-                                도착지 : {name}
-                            </Text>
-                        </View>
-                        <View style={{ flex: 5 }}>
                             <MapView
                                 style={{ width: winWidth, height: winHeight }}
                                 provider={PROVIDER_GOOGLE}
@@ -164,19 +168,15 @@ export default function MapToPolice({ }) {
                     </ScrollView>
                 )
                 }
-
-
             </View>
-        </>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
-    input: {
-        height: 40,
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
+    polName: {
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     destinationName: {
         color: 'black',

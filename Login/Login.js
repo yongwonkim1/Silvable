@@ -17,7 +17,7 @@ import { Alert } from "react-native";
 import { login } from "../utils/firebase";
 import * as firestore from 'firebase/firestore';
 import { UserContext } from '../contexts';
-import { signIn} from "../lib/auth";
+import { signIn } from "../lib/auth";
 
 
 
@@ -90,18 +90,18 @@ const Login = ({ navigation }) => {
   //     Alert.alert("로그인 살패", e.message);
   //   } finally {
   //     // spinner.stop()
-      
+
   //   }
   // };
   const signInSubmit = async () => { // 로그인 함수
-    const info = {email, password};
+    const info = { email, password };
     try {
-      const {user} = await signIn(info);
+      const { user } = await signIn(info);
       dispatch(user)
       console.log(user);
       navigation.reset({
-              routes: [{ name: "NewMemo"}],
-             });
+        routes: [{ name: "NewMemo" }],
+      });
     } catch (e) {
       Alert.alert("로그인에 실패하였습니다.");
     }
@@ -115,7 +115,7 @@ const Login = ({ navigation }) => {
     >
       <Container insets={insets}>
         <Image url={images.logo} imageStyle={{ borderRadius: 8 }} />
-        
+
         <Input
           label="Email"
           value={email}
