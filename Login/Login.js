@@ -100,7 +100,7 @@ const Login = ({ navigation }) => {
       dispatch(user)
       console.log(user);
       navigation.reset({
-        routes: [{ name: "NewMemo" }],
+        routes: [{ name: "Home" }],
       });
     } catch (e) {
       Alert.alert("로그인에 실패하였습니다.");

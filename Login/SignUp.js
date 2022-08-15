@@ -59,7 +59,7 @@ const SignUp = () => {
       _errorMessage = '이메일을 입력해주세요';
     }
 
-    if (!validateEmail(email2)) {
+    else if (!validateEmail(email2)) {
       _errorMessage = '보호자,노인 이메일을 입력해주세요(필수x)';
     }
 
@@ -125,6 +125,7 @@ const SignUp = () => {
           placeholder="이메일"
           returnKeyType="next"
         />
+
 
         <Input ref={email2Ref} label="Email"
           value={email2}
