@@ -61,16 +61,7 @@ function MemoView() {
   return (
 
     <View style={{ flex: 1 }}>
-      <View style={{ flex: 0.07, color: 'black', marginTop: 10, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', margin: 5 }}>
-        <Pressable
-          onPress={() => {
-            navigation.navigate("NewMemo",)
-          }}
-          style={{ alignItems: 'flex-end', }}
-        >
-          <Text style={{ fontSize: 30, color: 'black', backgroundColor: "skyblue", borderRadius: 10, padding: 5 }}>메모 추가</Text>
-        </Pressable>
-      </View>
+
 
       <ScrollView style={{ flex: 1 }}>
         {
@@ -105,6 +96,16 @@ function MemoView() {
           ) : null)
         }
       </ScrollView>
+      <View style={{ position: 'absolute', right: 20, bottom: 30 }}>
+        <Pressable
+          onPress={() => {
+            navigation.navigate("NewMemo",)
+          }}
+          style={{ alignItems: 'flex-end', }}
+        >
+          <Text style={{ fontSize: 30, fontWeight: '900', color: 'black', backgroundColor: "skyblue", borderRadius: 10, padding: 5 }}>메모 추가</Text>
+        </Pressable>
+      </View>
     </View>
 
   );
