@@ -51,10 +51,7 @@ const Home = ({ navigation }) => {
           <Image style={[styles.eleImg]} source={require('./assets/경찰.png')}></Image>
           <Text style={[styles.eleText]}>경찰서 안내</Text>
         </Pressable>
-        <Pressable style={[styles.element, { flex: 2, backgroundColor: '#ffcad5' }]} onPress={() => navigation.navigate('Stt',
-          {
-            back: 'Home',
-          })}
+        <Pressable style={[styles.element, { flex: 2, backgroundColor: '#ffcad5' }]} onPress={() => navigation.navigate('MemoView')}
           onLongPress={() => {
             setLetter("메모장");
             onPressRead()

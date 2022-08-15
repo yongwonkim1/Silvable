@@ -29,6 +29,7 @@ import EditAgenda from './src/screens/EditAgenda';
 import NewAgenda from './src/screens/NewAgenda';
 import MemoView from './Memo/MemoView';
 import MemoDetail from './Memo/MemoDetail';
+import Settings from './src/screens/Settings';
 
 const Stack = createStackNavigator();
 
@@ -63,6 +64,7 @@ export default function App() {
             <Stack.Screen name="NewAgenda" component={NewAgenda} />
             <Stack.Screen name="EditAgenda" component={EditAgenda} />
             <Stack.Screen name="MemoDetail" component={MemoDetail} />
+            <Stack.Screen name="Settings" component={Settings}/>
           </Stack.Navigator>
         </NavigationContainer>
       </ThemeProvider>
@@ -70,54 +72,3 @@ export default function App() {
 
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-// import React, { useState } from 'react';
-// import { View, TextInput, Button } from 'react-native';
-// import firestore from '@react-native-firebase/firestore';
-
-// const App = () => {
-//   const [addName, setAddName] = useState('');
-//   const [addAge, setAddAge] = useState('');
-//   const addCollection = firestore().collection('users');
-
-//   const addText = async () => {
-//     try {
-//       await addCollection.add({
-//         name: addName,
-//         age: addAge,
-//       });
-//       setAddName('');
-//       setAddAge('');
-//       console.log('Create Complete!');
-//     } catch (error) {
-//       console.log(error.message);
-//     }
-//   };
-//   // ...
-//   return (
-//     <View>
-//       {/* ... */}
-//       <TextInput
-//         placeholder="name"
-//         value={addName}
-//         onChangeText={setAddName}
-//       />
-//       <TextInput
-//         placeholder="age"
-//         value={addAge}
-//         onChangeText={setAddAge}
-//       />
-//       <Button title="Add Text" onPress={addText} />
-//     </View>
-//   );
-// };
-
-// export default App;

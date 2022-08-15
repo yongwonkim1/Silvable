@@ -2,7 +2,7 @@ import React, { useState, createContext } from 'react';
 
 const UserContext = createContext({
   user: { email: null, uid: null },
-  dispatch: () => {},
+  dispatch: () => { },
 });
 
 const UserProvider = ({ children }) => {
