@@ -63,6 +63,9 @@ function MemoView() {
     <View style={{ flex: 1 }}>
       <View style={{ flex: 0.07, color: 'black', marginTop: 10, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', margin: 5 }}>
         <Pressable
+          onPress={() => {
+            navigation.navigate("NewMemo",)
+          }}
           style={{ alignItems: 'flex-end', }}
         >
           <Text style={{ fontSize: 30, color: 'black', backgroundColor: "skyblue", borderRadius: 10, padding: 5 }}>메모 추가</Text>
@@ -71,24 +74,35 @@ function MemoView() {
 
       <ScrollView style={{ flex: 1 }}>
         {
-          getContent.map((content) => uid == content.uid || getSecondEmail == content.email ? (<View key={content.id} style={styles.memoContainer}>
-            <View style={{ flex: 5 }} >
-              <Text style={{ fontSize: 50, color: 'black' }}>{content.title}</Text>
-              <Text style={{ fontSize: 30, color: '#555555' }}>{content.text}</Text>
-              <Text style={{ fontSize: 15, color: '#555555' }}>{content.email}</Text>
-            </View>
-            <Button
-              onPress={() => {
-                navigation.navigate("MemoDetail", {
-                  title: content.title,
-                  test: content.text,
-                  email: content.email,
-                })
-              }}
-              title="수정/삭제"></Button>
-          </View>
-          ) : null
-          )
+          getContent.map((content) => uid == content.uid || getSecondEmail == content.email ? (
+            <>
+              <View key={content.id} style={styles.memoContainer}>
+                <View style={{ flex: 4, paddingRight: 10, borderRightWidth: 1, borderRightColor: '#999999' }} >
+                  <Text style={{ fontSize: 50, color: 'black' }} numberOfLines={1}>{content.title}</Text>
+                  <Text style={{ fontSize: 30, color: '#555555' }} numberOfLines={1}>{content.text}</Text>
+                  <Text style={{ fontSize: 15, color: '#555555' }} numberOfLines={1}>{content.email}</Text>
+                </View>
+                <View style={{ flex: 1, paddingLeft: 10, marginTop: 20 }}>
+                  <Pressable
+                    style={{ flex: 1 }}
+                    onPress={() => {
+                      navigation.navigate("MemoDetail", {
+                        title: content.title,
+                        test: content.text,
+                        email: content.email,
+                        id: content.id,
+                      })
+                    }}>
+                    <View style={{ flex: 1 }}>
+                      <Image source={require('./assets/edit.png')} style={{ width: '100%', height: '60%' }} />
+                      <Text style={{ color: 'black', fontWeight: '600', }}>수정 / 삭제</Text>
+                    </View>
+
+                  </Pressable>
+                </View>
+              </View>
+            </>
+          ) : null)
         }
       </ScrollView>
     </View>
