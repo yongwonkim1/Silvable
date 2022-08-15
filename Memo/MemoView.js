@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, Text, View, Button,Pressable,TouchableHighlight, ScrollView, Image, Alert} from 'react-native';
+import { StyleSheet, Text, View, Button, Pressable, TouchableHighlight, ScrollView, Image, Alert } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import { UserContext } from "../contexts";
 import { useNavigation } from '@react-navigation/native';
@@ -21,35 +21,37 @@ function MemoView() {
 
   const _callApi = async () => {
     try {
-      
-      firestore().collection("memo").orderBy("date","desc").onSnapshot((snapshot)=>{
-        const data = snapshot.docs.map((doc)=>({
+
+      firestore().collection("memo").orderBy("date", "desc").onSnapshot((snapshot) => {
+        const data = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
         setGetContent(data);
       })
-      
+
     } catch (error) {
-     
+
     }
   };
-    const getUserDoc = async () => {
+  const getUserDoc = async () => {
 
-      const docRef = await firestore().collection('users').get();
-      
-      const data = docRef.docs.map(doc => ({
-        ...doc.data(),
-        id: doc.id
+    const docRef = await firestore().collection('users').get();
+
+    const data = docRef.docs.map(doc => ({
+      ...doc.data(),
+      id: doc.id
     }))
 
-    data.map((doc)=> {if(doc.creatorId == uid){
-      setGetSecondEmail(doc.secondId);
-  }})
+    data.map((doc) => {
+      if (doc.creatorId == uid) {
+        setGetSecondEmail(doc.secondId);
+      }
+    })
 
-    }
+  }
 
-  useEffect(()=>{
+  useEffect(() => {
     _callApi();
 
     getUserDoc();
@@ -57,7 +59,7 @@ function MemoView() {
   })
 
   return (
-    
+
     <View style={{ flex: 1 }}>
       <View style={{ flex: 0.07, color: 'black', marginTop: 10, justifyContent: 'center', alignItems: 'center', flexDirection: 'row', margin: 5 }}>
         <Pressable
@@ -67,26 +69,26 @@ function MemoView() {
         </Pressable>
       </View>
 
-      <ScrollView style={{flex : 1}}>
-      {
-        getContent.map((content)=> uid == content.uid || getSecondEmail == content.email ? (<View key={content.id} style={styles.memoContainer}>
-          <View style={{flex:5}} >
-                  <Text style={{ fontSize: 50, color: 'black' }}>{content.title}</Text>
-                  <Text style={{ fontSize: 30, color: '#555555' }}>{content.text}</Text>
-                  <Text style={{ fontSize: 15, color: '#555555' }}>{content.email}</Text>
-          </View>
-          <Button onPress={navigation.navigate("MemoDetail",{
+      <ScrollView style={{ flex: 1 }}>
+        {
+          getContent.map((content) => uid == content.uid || getSecondEmail == content.email ? (<View key={content.id} style={styles.memoContainer}>
+            <View style={{ flex: 5 }} >
+              <Text style={{ fontSize: 50, color: 'black' }}>{content.title}</Text>
+              <Text style={{ fontSize: 30, color: '#555555' }}>{content.text}</Text>
+              <Text style={{ fontSize: 15, color: '#555555' }}>{content.email}</Text>
+            </View>
+            <Button onPress={navigation.navigate("MemoDetail", {
               title: content.title,
               test: content.text,
               email: content.email,
             })} title="수정/삭제"></Button>
           </View>
-        ): null
-        )
-      }
+          ) : null
+          )
+        }
       </ScrollView>
     </View>
-    
+
   );
 }
 
@@ -107,7 +109,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.5,
     shadowRadius: 5,
-    elevation: 20,  
+    elevation: 20,
   }
 })
 
