@@ -77,11 +77,15 @@ function MemoView() {
               <Text style={{ fontSize: 30, color: '#555555' }}>{content.text}</Text>
               <Text style={{ fontSize: 15, color: '#555555' }}>{content.email}</Text>
             </View>
-            <Button onPress={navigation.navigate("MemoDetail", {
-              title: content.title,
-              test: content.text,
-              email: content.email,
-            })} title="수정/삭제"></Button>
+            <Button
+              onPress={() => {
+                navigation.navigate("MemoDetail", {
+                  title: content.title,
+                  test: content.text,
+                  email: content.email,
+                })
+              }}
+              title="수정/삭제"></Button>
           </View>
           ) : null
           )
