@@ -12,10 +12,7 @@ import { UserProvider } from './contexts';
 import { theme } from './theme';
 import Login from './Login/Login';
 import SignUp from './Login/SignUp';
-import Memo from './Memo/Memo';
 import NewMemo from './Memo/NewMemo';
-import MemoWrite from './Memo/MemoWrite';
-import MemoContent from './Memo/MemoContent';
 import Home from './src/screens/Home';
 // import Memo from '.src/screens/Memo';
 import Stt from './src/screens/Stt';
@@ -49,11 +46,8 @@ export default function App() {
           >
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="SignUp" component={SignUp} />
-            <Stack.Screen name="Memo" component={Memo} />
             <Stack.Screen name="NewMemo" component={NewMemo} />
             <Stack.Screen name="MemoView" component={MemoView}/>
-            <Stack.Screen name="MemoWrite" component={MemoWrite} />
-            <Stack.Screen name="MemoContent" component={MemoContent} />
             <Stack.Screen name="Home" component={Home} />
             {/* <Stack.Screen name="Memo" component={Memo} /> */}
             <Stack.Screen name="Stt" component={Stt} />
