@@ -63,17 +63,17 @@ function MemoView() {
 
     getUserDoc();
 
-  })
+},[])
 
   return (
 
     <View style={{ flex: 1 }}>
 
       <ScrollView style={{ flex: 1 }}>
-        {
+        <React.StrictMode>{
           getContent.map((content) => uid == content.uid || getSecondEmail == content.email ? (
             <>
-              <View key={content.id} style={styles.memoContainer}>
+              <View style={styles.memoContainer}>
                 <View style={{ flex: 4, paddingRight: 10, borderRightWidth: 1, borderRightColor: '#999999' }} >
                   <Text style={{ fontSize: 50, color: 'black' }} numberOfLines={1}>{content.title}</Text>
                   <Text style={{ fontSize: 30, color: '#555555' }} numberOfLines={1}>{content.text}</Text>
@@ -101,6 +101,7 @@ function MemoView() {
             </>
           ) : null)
         }
+        </React.StrictMode>
       </ScrollView>
       <View style={{ height: 100 }}>
         <View style={[styles.bottomTap]}>

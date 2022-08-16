@@ -88,26 +88,33 @@ function LoadAgenda({ navigation }) {
                 // let ite = {name : content.text}
                 // item[content.date] = ["name :"+ite.name]}
         }
-        navigation.navigate('Agenda', { result }) 
+        
         })
-        console.log(item)
-        setResult(item)
+        await setResult(item)
+        setTimeout(()=>{
+            
+            console.log(item)
+            navigation.navigate('Agenda', { result }) 
+        },3000)
+        
     }
-        const run = async () =>{
-            await _callApi();
-            await getUserDoc();
-            Load();
-        }
-        // useEffect(()=>{
-        //     run();
+        // const run = async () =>{
+        //     await _callApi();
+        //     await getUserDoc();
+        //     Load;
+        // }
+        useEffect(()=>{
+            _callApi();
+            getUserDoc();
+            
 
-        // },[])
+        },[])
     
 
     return (
         <View>
             <Button title="get" onPress={()=>{_callApi();getUserDoc()}}/>
-            <Button title="Load" onPress={run} />
+            <Button title="Load" onPress={()=>{Load();navigation.navigate('Agenda', { result }) }} />
 
 
         </View>
