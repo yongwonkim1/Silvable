@@ -4,6 +4,7 @@ import firestore from '@react-native-firebase/firestore';
 import { UserContext } from "../../contexts";
 import { AgendaSchedule } from 'react-native-calendars';
 import Agenda from './Agenda'
+import { loadBundle } from 'firebase/firestore';
 
 function LoadAgenda({ navigation }) {
     const [users, setUsers] = useState();
@@ -71,8 +72,8 @@ function LoadAgenda({ navigation }) {
     //     console.log(item)
     //     setResult(item)
 
-    //   }
-    const Load = () => {
+    //   } 
+    const Load = async() => {
         const item = []
         // var items = [[]]
         // getContent.map((content) =>{ 
@@ -87,25 +88,26 @@ function LoadAgenda({ navigation }) {
                 // let ite = {name : content.text}
                 // item[content.date] = ["name :"+ite.name]}
         }
+        navigation.navigate('Agenda', { result }) 
         })
         console.log(item)
         setResult(item)
-        navigation.navigate("Agenda",{result})
     }
-    
-    //     useEffect(()=>{
-    //         _callApi();
-    //         getUserDoc();
-    //         Load();
-    //         navigation.navigate('Agenda', { result })
+        const run = async () =>{
+            await _callApi();
+            await getUserDoc();
+            Load();
+        }
+        // useEffect(()=>{
+        //     run();
 
-    //     })
+        // },[])
     
 
     return (
         <View>
             <Button title="get" onPress={()=>{_callApi();getUserDoc()}}/>
-            <Button title="Load" onPress={()=>Load()} />
+            <Button title="Load" onPress={run} />
 
 
         </View>
