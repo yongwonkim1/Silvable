@@ -2,15 +2,19 @@ import React, { useState, useContext } from 'react';
 import { View, TextInput, Button, Pressable, StyleSheet, Text } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import { UserContext } from "../contexts";
+import { useEffect } from 'react';
 
 const NewMemo = ({ navigation }) => {
-  const [title, setTitle] = useState('');
-  const [text, setText] = useState('');
+  const [title, setTitle] = useState(route.params?.title);
+  const [text, setText] = useState(route.params?.text);
   const addCollection = firestore().collection('memo');
   const userEmail = useContext(UserContext);
   const email = userEmail.user.email;
   const uid = userEmail.user.uid;
-
+useEffect(()=>{
+  setTitle(route.params?.title);
+  setText(route.params?.text);
+},[route.params?.title])
   const addText = async () => {
     try {
       await addCollection.add({
@@ -34,6 +38,9 @@ const NewMemo = ({ navigation }) => {
     <View style={[styles.container]}>
       <View style={[styles.date]}>
         <TextInput style={[styles.title]} value={title} onChangeText={setTitle} placeholder="제목을 입력해주세요" multiline={true} />
+        <Pressable onPress={()=> navigation.navigate("Stt2",{
+          back:"NewMemo",
+          merge:true,})}/>
       </View>
       <View style={[styles.text]}>
         <TextInput value={text} onChangeText={setText} placeholder="내용을 입력해주세요" multiline={true} style={[styles.input]} />
@@ -41,6 +48,15 @@ const NewMemo = ({ navigation }) => {
       <Pressable title="저장" style={[styles.button]} onPress={addText}>
         <Text style={{ color: "white", fontSize: 30 }}>저장하기</Text>
       </Pressable>
+      <View style={{position:'absolute', top:0, left:0, bottom:80, right:10, justifyContent:'flex-end', alignItems:'flex-end'}}>
+        <Pressable onPress={()=>navigation.navigate('Stt',{
+          back:'NewMemo',
+          merge: true,})}>
+          <View style={[styles.new]}>
+            <Image style={{margin:10,flex:1,resizeMode:'contain'}}source={require('./assets/mic.png')}/>
+          </View>
+        </Pressable>
+      </View>
     </View>
   );
 };

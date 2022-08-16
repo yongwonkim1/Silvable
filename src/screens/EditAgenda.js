@@ -2,7 +2,7 @@
 // export default App
 
 import { jsonEval } from '@firebase/util';
-import React, { Fragment, Component, useState, useEffect} from 'react';
+import React, { Fragment, Component, useState, useEffect,useContext} from 'react';
 import {
   Pressable,
   StyleSheet,
@@ -13,31 +13,64 @@ import {
   TouchableOpacity,
   TextInput
 } from 'react-native';
+import DatePicker from 'react-native-date-picker';
+import firestore from '@react-native-firebase/firestore';
+import { UserContext } from "../../contexts";
 //JSON.stringify(route.params?.text)
 const App = ({navigation,route}) => {
+  const userEmail = useContext(UserContext);
+  const email = userEmail.user.email;
+  const uid = userEmail.user.uid;
   const [plan,setPlan] = React.useState(route.params?.text)
+  const [open, setOpen] = useState(false);
+  const addCollection = firestore().collection('plan');
+  const UpdateDB = async () => {
+    try {
+      const rows = await addCollection.where('date', '==',route.params?.date).where("email",'==',email);
+      rows.get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          doc.ref.update({text:plan});
+        });
+      });
+      console.log('Update Complete!', rows);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  const DeleteDB = async () => {
+    try {
+      //   await addCollection.doc('').delete();
+      const rows = await addCollection.where('date', '==',route.params.date).where("email",'==',email);
+      rows.get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          doc.ref.delete();
+        });
+      });
+      console.log('Delete Complete!', rows);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   useEffect(()=>{
     setPlan(route.params?.text);
+    
 
   },[route.params?.text]);
   return (
     <View style={[styles.container]}>
       <View style={[styles.date]}>
-        <Text style={{fontSize:30}}>
-          {plan}
-          {route.params?.text}
-        </Text>
+        <Text>{route.params?.date}</Text>
       </View>
       <View style={[styles.text]}>
         <TextInput value={plan}  onChangeText={setPlan} multiline={true} style={[styles.input]}></TextInput> 
       </View>
       <View style={[styles.button]}>
         
-      <Pressable style={[styles.button2]} onPress={()=>navigation.goBack()}>
+      <Pressable style={[styles.button2]} onPress={()=>{UpdateDB();navigation.navigate("LoadAgenda")}}>
         <Text style={{marginTop:10,flex:1,color:"white",fontSize:30}}>수정</Text>
         {/*파이어베이스 수정추가*/}
       </Pressable>
-      <Pressable style={[styles.button3]} onPress={()=>navigation.goBack()}>
+      <Pressable style={[styles.button3]} onPress={()=>{DeleteDB();navigation.navigate("LoadAgenda")}}>
         <Text style={{marginTop:10,flex:1, color:"white",fontSize:30}}>삭제</Text>
         {/*파이어베이스 삭제추가*/}
       </Pressable>
