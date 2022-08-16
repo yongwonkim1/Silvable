@@ -63,7 +63,7 @@ function MemoView() {
 
     getUserDoc();
 
-  })
+  }, [])
 
   return (
 
@@ -85,7 +85,7 @@ function MemoView() {
                     onPress={() => {
                       navigation.navigate("MemoDetail", {
                         title: content.title,
-                        test: content.text,
+                        text: content.text,
                         email: content.email,
                         id: content.id,
                       })
