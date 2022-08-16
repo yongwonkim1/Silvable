@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text, Platform, PermissionsAndroid, ScrollView, Dimensions, TextInput, } from "react-native";
+import { View, StyleSheet, Text, Platform, PermissionsAndroid, ScrollView, Dimensions, TextInput, Pressable, Linking, Image, } from "react-native";
 
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import Geolocation from 'react-native-geolocation-service';
@@ -16,8 +16,15 @@ interface ILocation {
     latitude: number;
     longitude: number;
 }
+import Tts from "react-native-tts";
 
-export default function MapToHome({ }) {
+export default function MapToHome({ navigation }) {
+    const [letter, setLetter] = useState("");
+    onPressRead = () => {
+        Tts.stop();
+        Tts.speak(letter);
+    };
+
     const [location, setLocation] = useState<ILocation | undefined>(undefined);  // 현재위치
     const [destination, setDestination] = useState({ latitude: 38, longitude: 128 });  // 도착지 위치(경찰서)
     const [goto, setGoto] = useState('');  // 추후 DB에 저장된 주소로 사용
@@ -142,7 +149,43 @@ export default function MapToHome({ }) {
                     </ScrollView>
                 )
                 }
-
+                <View style={{ height: 100 }}>
+                    <View style={[styles.bottomTap]}>
+                        <Pressable
+                            onPress={() => {
+                                navigation.pop();
+                            }}
+                            onLongPress={() => {
+                                setLetter("뒤로가기");
+                                onPressRead()
+                            }}>
+                            <Image style={[styles.btImg]} source={require('./assets/뒤로가기.jpg')} />
+                        </Pressable >
+                        <Pressable
+                            onPress={() => {
+                                navigation.popToTop();
+                            }}
+                            onLongPress={() => {
+                                setLetter("홈");
+                                onPressRead()
+                            }}>
+                            <Image style={[styles.btImg]} source={require('./assets/홈.png')} />
+                        </Pressable>
+                        <Pressable onLongPress={() => {
+                            setLetter("119");
+                            onPressRead()
+                            { Linking.openURL(`tel:119`) }
+                        }}>
+                            <Image style={[styles.btImg]} source={require('./assets/119.png')} />
+                        </Pressable>
+                        <Pressable onLongPress={() => {
+                            setLetter("돋보기");
+                            onPressRead()
+                        }} onPress={() => navigation.navigate("Magnify")}>
+                            <Image style={[styles.btImg]} source={require('./assets/돋보기.png')} />
+                        </Pressable>
+                    </View>
+                </View>
 
             </View>
         </>
@@ -160,4 +203,17 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         color: 'black',
     },
+    bottomTap: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        borderTopColor: 'black',
+        backgroundColor: 'white',
+        marginTop: 20
+    },
+    btImg: {
+        height: 50,
+        width: 50
+    }
 });

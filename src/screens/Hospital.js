@@ -4,11 +4,14 @@ import {
     StyleSheet,
     Text,
     View,
-    TouchableOpacity,
+    Linking,
     Pressable,
     Image,
+    Dimensions
 } from 'react-native';
 import Tts from "react-native-tts";
+const winWidth = Dimensions.get('window').width;
+
 export default function Hospital({ navigation }) {
 
     const [letter, setLetter] = useState("");
@@ -123,6 +126,43 @@ export default function Hospital({ navigation }) {
                     </View>
                 </Pressable>
             </View>
+            <View style={{ height: 100, width: winWidth }}>
+                <View style={[styles.bottomTap]}>
+                    <Pressable
+                        onPress={() => {
+                            navigation.pop();
+                        }}
+                        onLongPress={() => {
+                            setLetter("뒤로가기");
+                            onPressRead()
+                        }}>
+                        <Image style={[styles.btImg]} source={require('./assets/뒤로가기.jpg')} />
+                    </Pressable >
+                    <Pressable
+                        onPress={() => {
+                            navigation.popToTop();
+                        }}
+                        onLongPress={() => {
+                            setLetter("홈");
+                            onPressRead()
+                        }}>
+                        <Image style={[styles.btImg]} source={require('./assets/홈.png')} />
+                    </Pressable>
+                    <Pressable onLongPress={() => {
+                        setLetter("119");
+                        onPressRead()
+                        { Linking.openURL(`tel:119`) }
+                    }}>
+                        <Image style={[styles.btImg]} source={require('./assets/119.png')} />
+                    </Pressable>
+                    <Pressable onLongPress={() => {
+                        setLetter("돋보기");
+                        onPressRead()
+                    }} onPress={() => navigation.navigate("Magnify")}>
+                        <Image style={[styles.btImg]} source={require('./assets/돋보기.png')} />
+                    </Pressable>
+                </View>
+            </View>
         </View >
     );
 };
@@ -164,5 +204,18 @@ const styles = StyleSheet.create({
         height: '100%',
         borderRadius: 20,
     },
+    bottomTap: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        borderTopColor: 'black',
+        backgroundColor: 'white',
+        marginTop: 20
+    },
+    btImg: {
+        height: 50,
+        width: 50
+    }
 });
 

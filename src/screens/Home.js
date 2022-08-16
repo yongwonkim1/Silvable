@@ -82,16 +82,24 @@ const Home = ({ navigation }) => {
       </View>
       <View style={{ height: 100 }}>
         <View style={[styles.bottomTap]}>
-          <Pressable onLongPress={() => {
-            setLetter("뒤로가기");
-            onPressRead()
-          }}>
+          <Pressable
+            onPress={() => {
+              navigation.pop();
+            }}
+            onLongPress={() => {
+              setLetter("뒤로가기");
+              onPressRead()
+            }}>
             <Image style={[styles.btImg]} source={require('./assets/뒤로가기.jpg')} />
           </Pressable >
-          <Pressable onLongPress={() => {
-            setLetter("홈");
-            onPressRead()
-          }}>
+          <Pressable
+            onPress={() => {
+              navigation.popToTop();
+            }}
+            onLongPress={() => {
+              setLetter("홈");
+              onPressRead()
+            }}>
             <Image style={[styles.btImg]} source={require('./assets/홈.png')} />
           </Pressable>
           <Pressable onLongPress={() => {

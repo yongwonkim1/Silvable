@@ -1,10 +1,17 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Pressable, TouchableHighlight, ScrollView, Image, Alert } from 'react-native';
+import { StyleSheet, Text, View, Button, Pressable, Linking, ScrollView, Image, Alert } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import { UserContext } from "../contexts";
 import { useNavigation } from '@react-navigation/native';
+import Tts from "react-native-tts";
 
 function MemoView() {
+  const [letter, setLetter] = useState("");
+  onPressRead = () => {
+    Tts.stop();
+    Tts.speak(letter);
+  };
+
   const [users, setUsers] = useState();
   const usersCollection = firestore().collection('memo');
   const userEmail = useContext(UserContext);
@@ -50,7 +57,7 @@ function MemoView() {
     })
 
   }
- 
+
   useEffect(() => {
     _callApi();
 
@@ -95,7 +102,44 @@ function MemoView() {
           ) : null)
         }
       </ScrollView>
-      <View style={{ position: 'absolute', right: 20, bottom: 30 }}>
+      <View style={{ height: 100 }}>
+        <View style={[styles.bottomTap]}>
+          <Pressable
+            onPress={() => {
+              navigation.pop();
+            }}
+            onLongPress={() => {
+              setLetter("뒤로가기");
+              onPressRead()
+            }}>
+            <Image style={[styles.btImg]} source={require('./assets/뒤로가기.jpg')} />
+          </Pressable >
+          <Pressable
+            onPress={() => {
+              navigation.popToTop();
+            }}
+            onLongPress={() => {
+              setLetter("홈");
+              onPressRead()
+            }}>
+            <Image style={[styles.btImg]} source={require('./assets/홈.png')} />
+          </Pressable>
+          <Pressable onLongPress={() => {
+            setLetter("119");
+            onPressRead()
+            { Linking.openURL(`tel:119`) }
+          }}>
+            <Image style={[styles.btImg]} source={require('./assets/119.png')} />
+          </Pressable>
+          <Pressable onLongPress={() => {
+            setLetter("돋보기");
+            onPressRead()
+          }} onPress={() => navigation.navigate("Magnify")}>
+            <Image style={[styles.btImg]} source={require('./assets/돋보기.png')} />
+          </Pressable>
+        </View>
+      </View>
+      <View style={{ position: 'absolute', right: 20, bottom: 100 }}>
         <Pressable
           onPress={() => {
             navigation.navigate("NewMemo",)
@@ -128,6 +172,19 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 5,
     elevation: 20,
+  },
+  bottomTap: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    borderTopColor: 'black',
+    backgroundColor: 'white',
+    marginTop: 20
+  },
+  btImg: {
+    height: 50,
+    width: 50
   }
 })
 

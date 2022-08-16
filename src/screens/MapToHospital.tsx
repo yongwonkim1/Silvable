@@ -8,7 +8,8 @@ import {
     ScrollView,
     Dimensions,
     Pressable,
-    Linking
+    Linking,
+    Image
 } from "react-native";
 
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
@@ -28,8 +29,15 @@ interface ILocation {
     latitude: number;
     longitude: number;
 }
+import Tts from "react-native-tts";
 
-export default function MapToHospital({ route }: any) {
+export default function MapToHospital({ navigation, route }: any) {
+    const [letter, setLetter] = useState("");
+    onPressRead = () => {
+        Tts.stop();
+        Tts.speak(letter);
+    };
+
     const [department, setDepartment] = useState(route.params.id);  // 병원 부서
     const [location, setLocation] = useState<ILocation | undefined>(undefined);  // 현재위치
     const [destination, setDestination] = useState<ILocation | undefined>(undefined);  // 도착지 위치(경찰서)
@@ -138,7 +146,7 @@ export default function MapToHospital({ route }: any) {
             <View style={{ flex: 8 }}>
                 {location ? (
                     <ScrollView style={{ flex: 1 }}>
-                        <View style={{ flex: 5 }}>
+                        <View style={{ flex: 6 }}>
                             <MapView
                                 style={{ width: winWidth, height: winHeight * 0.9 }}
                                 provider={PROVIDER_GOOGLE}
@@ -189,10 +197,44 @@ export default function MapToHospital({ route }: any) {
                     </ScrollView>
                 )
                 }
-
-
+                <View style={{ height: 100 }}>
+                    <View style={[styles.bottomTap]}>
+                        <Pressable
+                            onPress={() => {
+                                navigation.pop();
+                            }}
+                            onLongPress={() => {
+                                setLetter("뒤로가기");
+                                onPressRead()
+                            }}>
+                            <Image style={[styles.btImg]} source={require('./assets/뒤로가기.jpg')} />
+                        </Pressable >
+                        <Pressable
+                            onPress={() => {
+                                navigation.popToTop();
+                            }}
+                            onLongPress={() => {
+                                setLetter("홈");
+                                onPressRead()
+                            }}>
+                            <Image style={[styles.btImg]} source={require('./assets/홈.png')} />
+                        </Pressable>
+                        <Pressable onLongPress={() => {
+                            setLetter("119");
+                            onPressRead()
+                            { Linking.openURL(`tel:119`) }
+                        }}>
+                            <Image style={[styles.btImg]} source={require('./assets/119.png')} />
+                        </Pressable>
+                        <Pressable onLongPress={() => {
+                            setLetter("돋보기");
+                            onPressRead()
+                        }} onPress={() => navigation.navigate("Magnify")}>
+                            <Image style={[styles.btImg]} source={require('./assets/돋보기.png')} />
+                        </Pressable>
+                    </View>
+                </View>
             </View>
-
         </View>
     );
 };
@@ -209,6 +251,19 @@ const styles = StyleSheet.create({
     map: {
         ...StyleSheet.absoluteFillObject,
     },
+    bottomTap: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        borderTopColor: 'black',
+        backgroundColor: 'white',
+        marginTop: 20
+    },
+    btImg: {
+        height: 50,
+        width: 50
+    }
 
 });
 
