@@ -59,7 +59,7 @@ const App = ({navigation,route}) => {
   return (
     <View style={[styles.container]}>
       <View style={[styles.date]}>
-        <Text>{route.params?.date}</Text>
+        <Text style={{fontSize:30}}>{route.params?.date}</Text>
       </View>
       <View style={[styles.text]}>
         <TextInput value={plan}  onChangeText={setPlan} multiline={true} style={[styles.input]}></TextInput> 

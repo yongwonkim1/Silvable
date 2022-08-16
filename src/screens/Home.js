@@ -71,7 +71,7 @@ const Home = ({ navigation }) => {
           <Text style={[styles.eleText]}>정보 수정</Text>
         </Pressable>
         <Pressable style={[styles.element, { flex: 2, backgroundColor: 'white' }]}
-          onPress={() => navigation.navigate('Agenda')}
+          onPress={() => navigation.navigate('LoadAgenda')}
           onLongPress={() => {
             setLetter("일정 관리");
             onPressRead()
