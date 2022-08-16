@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState, useContext } from 'react';
-import { Alert, StyleSheet, Text, View, TouchableOpacity, Pressable, Button } from 'react-native';
+import { Alert, StyleSheet, Text, View, TouchableOpacity, Pressable, Button,Image } from 'react-native';
 import { Agenda, DateData, AgendaEntry, AgendaSchedule, LocaleConfig } from 'react-native-calendars';
 import testIDs from './testIDs';
 import { UserContext } from '../../contexts';
@@ -11,7 +11,7 @@ interface State {
   result: string[];
 }
 
-LocaleConfig.locales['fr'] = {
+LocaleConfig.locales['ko'] = {
   monthNames: [
     '1월',
     '2월',
@@ -27,12 +27,12 @@ LocaleConfig.locales['fr'] = {
     '12월',
   ],
   monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-  dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
-  dayNamesShort: ['월', '화', '수', '목', '금', '토', '일'],
+  dayNames: ['일요일','월요일', '화요일', '수요일', '목요일', '금요일', '토요일',],
+  dayNamesShort: ['일', '월', '화', '수', '목', '금', '토',],
   today: "오늘"
 
 };
-LocaleConfig.defaultLocale = 'fr';
+LocaleConfig.defaultLocale = 'ko';
 export default class AgendaScreen extends React.Component<State> {
   state: State = {
     items: { '2000-01-22': [{ name: 'item 1 - any js object' }] }
@@ -41,6 +41,7 @@ export default class AgendaScreen extends React.Component<State> {
   render() {
 
     this.state.result = this.props.route.params.result
+    console.log(this.state.result)
     return (<>
       <Agenda
         testID={testIDs.agenda.CONTAINER}
@@ -75,7 +76,7 @@ export default class AgendaScreen extends React.Component<State> {
           params: { text: "" },
         })}>
           <View style={[styles.new]}>
-            <Text>Hello</Text>
+            <Image style={{margin:10,resizeMode:'contain',flex:1}}source={require('./assets/plus.png')}/>
           </View>
         </Pressable>
       </View>
@@ -125,10 +126,11 @@ export default class AgendaScreen extends React.Component<State> {
 
       }
       // const tim = this.timeToString(Date.parse(result[0]))
-      // items[tim].push({
-      //   name:result[1],
+      // for(let i=0;i<result.length;i+=2)
+      // items[result[i]].push({
+      //   name:result[i+1],
       //   height:30,
-      //   day:result[0]
+      //   day:result[i]
       // })
       const newItems: AgendaSchedule = {};
       Object.keys(items).forEach(key => {
@@ -137,7 +139,7 @@ export default class AgendaScreen extends React.Component<State> {
       this.setState({
         items: newItems
       });
-    }, 1000);
+    }, 2000);
   }
 
   renderItem = (reservation: AgendaEntry, isFirst: boolean) => {

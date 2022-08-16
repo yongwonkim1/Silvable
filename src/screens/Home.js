@@ -62,7 +62,7 @@ const Home = ({ navigation }) => {
       </View>
       <View style={[styles.subCon]}>
         <Pressable style={[styles.element, { flex: 2, backgroundColor: '#ffc8cd' }]}
-          onPress={() => navigation.navigate('Login')}
+          onPress={() => navigation.navigate('Settings')}
           onLongPress={() => {
             setLetter("정보수정");
             onPressRead()
