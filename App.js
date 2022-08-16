@@ -44,25 +44,25 @@ export default function App() {
               headerShown: true,
             }}
           >
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="SignUp" component={SignUp} />
-            <Stack.Screen name="NewMemo" component={NewMemo} />
-            <Stack.Screen name="MemoView" component={MemoView}/>
-            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="Login" component={Login} options={{ title: '로그인' }} />
+            <Stack.Screen name="SignUp" component={SignUp} options={{ title: '회원가입' }} />
+            <Stack.Screen name="NewMemo" component={NewMemo} options={{ title: '메모 작성' }} />
+            <Stack.Screen name="MemoView" component={MemoView} options={{ title: '메모' }} />
+            <Stack.Screen name="Home" component={Home} options={{ title: '홈' }} />
             {/* <Stack.Screen name="Memo" component={Memo} /> */}
-            <Stack.Screen name="Stt" component={Stt} />
-            <Stack.Screen name="Stt2" component={Stt2} />
-            <Stack.Screen name="Hospital" component={Hospital} />
-            <Stack.Screen name="Magnify" component={Magnify} />
-            <Stack.Screen name="MapToHospital" component={MapToHospital} />
-            <Stack.Screen name="MapToHome" component={MapToHome} />
-            <Stack.Screen name="MapToPolice" component={MapToPolice} />
-            <Stack.Screen name="Agenda" component={Agenda} />
-            <Stack.Screen name="NewAgenda" component={NewAgenda} />
-            <Stack.Screen name="EditAgenda" component={EditAgenda} />
-            <Stack.Screen name="MemoDetail" component={MemoDetail} />
-            <Stack.Screen name="Settings" component={Settings}/>
-            <Stack.Screen name="LoadAgenda" component={LoadAgenda}/>
+            <Stack.Screen name="Stt" component={Stt} options={{ title: '음성인식' }} />
+            <Stack.Screen name="Stt2" component={Stt2} options={{ title: '음성인식' }} />
+            <Stack.Screen name="Hospital" component={Hospital} options={{ title: '병원 찾기' }} />
+            <Stack.Screen name="Magnify" component={Magnify} options={{ title: '돋보기' }} />
+            <Stack.Screen name="MapToHospital" component={MapToHospital} options={{ title: '가까운 병원 경로' }} />
+            <Stack.Screen name="MapToHome" component={MapToHome} options={{ title: '집으로' }} />
+            <Stack.Screen name="MapToPolice" component={MapToPolice} options={{ title: '가까운 경찰서 경로' }} />
+            <Stack.Screen name="Agenda" component={Agenda} options={{ title: '일정' }} />
+            <Stack.Screen name="NewAgenda" component={NewAgenda} options={{ title: '일정 추가' }} />
+            <Stack.Screen name="EditAgenda" component={EditAgenda} options={{ title: '일정 변경' }} />
+            <Stack.Screen name="MemoDetail" component={MemoDetail} options={{ title: '자세한 메모' }} />
+            <Stack.Screen name="Settings" component={Settings} options={{ title: '설정' }} />
+            <Stack.Screen name="LoadAgenda" component={LoadAgenda} options={{ title: '일정 불러오기' }} />
           </Stack.Navigator>
         </NavigationContainer>
       </ThemeProvider>
