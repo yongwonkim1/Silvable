@@ -5,8 +5,8 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 //import { ProgressContext, UserContext } from "../contexts";
 import styled from "styled-components/native";
-import { Text } from "react-native";
-import { Input, Image, Button } from "../Components";
+import { Text, View, Image } from "react-native";
+import { Input, Button } from "../Components";
 
 import { images } from "../utils/images";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -114,7 +114,9 @@ const Login = ({ navigation }) => {
       extraScrollHeight={20}
     >
       <Container insets={insets}>
-        <Image url={images.logo} imageStyle={{ borderRadius: 8 }} />
+        <View>
+          <Image source={require('./assets/logo.png')} style={{ height: 150, widht: 150, resizeMode: 'contain' }} />
+        </View>
 
         <Input
           label="Email"

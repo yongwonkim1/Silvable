@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
-import { Text } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import styled from 'styled-components/native';
-import { Image, Input, Button } from '../Components';
+import { Input, Button } from '../Components';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { validateEmail, removeWhitespace } from '../utils/common';
 import { images } from '../utils/images';
@@ -23,7 +23,7 @@ const Container = styled.View`
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.background};
-  padding: 300px 20px;
+  padding: 100px 20px;
 `;
 const ErrorText = styled.Text`
   align-items: flex-start;
@@ -118,6 +118,9 @@ const SignUp = () => {
   return (
     <KeyboardAwareScrollView>
       <Container>
+        <View>
+          <Image source={require('./assets/logo.png')} style={{ height: 150, widht: 150, resizeMode: 'contain' }} />
+        </View>
         <Input ref={emailRef} label="Email"
           value={email}
           onChangeText={text => setEmail(removeWhitespace(text))}
