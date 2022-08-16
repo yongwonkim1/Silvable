@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState, useContext } from 'react';
-import { Alert, StyleSheet, Text, View, TouchableOpacity, Pressable, Button } from 'react-native';
+import { Alert, StyleSheet, Text, View, TouchableOpacity, Pressable, Button,Image } from 'react-native';
 import { Agenda, DateData, AgendaEntry, AgendaSchedule, LocaleConfig } from 'react-native-calendars';
 import testIDs from './testIDs';
 import { UserContext } from '../../contexts';
@@ -76,7 +76,7 @@ export default class AgendaScreen extends React.Component<State> {
           params: { text: "" },
         })}>
           <View style={[styles.new]}>
-            <Text>Hello</Text>
+            <Image style={{margin:10,resizeMode:'contain',flex:1}}source={require('./assets/plus.png')}/>
           </View>
         </Pressable>
       </View>
