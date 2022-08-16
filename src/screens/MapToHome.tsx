@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { View, StyleSheet, Text, Platform, PermissionsAndroid, ScrollView, Dimensions, TextInput, Pressable, Linking, Image, } from "react-native";
 
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import Geolocation from 'react-native-geolocation-service';
 import MapViewDirections from 'react-native-maps-directions';
 import Geocoder from 'react-native-geocoding';
+import firestore from '@react-native-firebase/firestore'
+import { UserContext } from '../../contexts'
 Geocoder.init(`AIzaSyDDXb9N2-02HXrCo7LBuuNSxSg-Dp4-w64`, { language: "kor" }); // use a valid API key
 
 
@@ -28,6 +30,25 @@ export default function MapToHome({ navigation }) {
     const [location, setLocation] = useState<ILocation | undefined>(undefined);  // 현재위치
     const [destination, setDestination] = useState({ latitude: 38, longitude: 128 });  // 도착지 위치(경찰서)
     const [goto, setGoto] = useState('');  // 추후 DB에 저장된 주소로 사용
+    const [user, setUser] = useState();
+    const usersCollection = firestore().collection('address');
+    const userEmail = useContext(UserContext);
+    const email = userEmail.user.email;
+    const uid = userEmail.user.uid;
+
+    const _callApi = async () => {
+        try {
+            const data = await usersCollection.where("email", "==", email).get();
+            setUser(data._docs.map(doc => ({ ...doc.data(), id: doc.id })));
+            console.log(user);
+            user.forEach((row) => {
+                setGoto(row.address)
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
 
     async function requestPermissions() {
         if (Platform.OS === 'ios') {
@@ -62,12 +83,15 @@ export default function MapToHome({ navigation }) {
                 var location = json.results[0].geometry.location;
                 console.log(location);
                 setDestination({ latitude: location.lat, longitude: location.lng })
+                _callApi();
             })
             .catch(error => console.warn(error));
     }
 
     useEffect(() => {
+        _callApi();
         getGeoCode();
+
         requestPermissions();
         Geolocation.getCurrentPosition(
             position => {
@@ -137,7 +161,9 @@ export default function MapToHome({ navigation }) {
                                 optimizeWaypoints={true}
                                 onError={(errorMessage) => {
                                     console.log('도착할 수 없는 장소입니다.');
+                                    _callApi();
                                     getGeoCode();
+
                                 }}
                             />
                         </MapView>

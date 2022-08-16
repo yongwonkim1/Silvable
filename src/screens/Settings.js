@@ -22,7 +22,7 @@
 //         speechPitch: 1,
 //         text: "이 목소리로 읽습니다."
 //     };
-    
+
 
 //     constructor(props) {
 //         super(props);
@@ -99,56 +99,60 @@
 //         width: 150
 //     },
 // })
-import React, { Component,useContext,useState } from "react";
-import {Text, View, Image,Pressable,TextInput,Button} from 'react-native'
+import React, { Component, useContext, useState } from "react";
+import { Text, View, Image, Pressable, TextInput, Button } from 'react-native'
 import firestore from '@react-native-firebase/firestore';
-import {UserContext} from '../../contexts'
+import { UserContext } from '../../contexts'
 import { useEffect } from "react";
-const Settings = ({route,navigation}) => {
-    const addCollection = firestore().collection('plan');
-    const userEmail = useContext(UserContext);
-    const email = userEmail.user.email;
-    const uid = userEmail.user.uid;
-    const [address,setAddress] = useState('')
-    useEffect(()=>{
-        setAddress(route.params?.text)
-    },[route.params?.text])
-    const addAddress = async () => {
-    
-        try {
-          await addCollection.add({
-            email : email,
-            uid: uid,
-            address : address
-          });
-          setAddress('');
-          console.log('Create Complete!');
-        } catch (error) {
-          console.log(error.message);
-        }
-      };
-      return(
-        <View style={{flex:1}}>
-            <Text style={{fontSize:40,alignContent:'center'}}>주소를 입력해주세요</Text>
-            <View style={{borderRadius:30,backgroundColor:'white',flex:1, flexDirection:'row',justifyContent:'space-between'}}>
-                <TextInput style={{marginTop:30,flex:6,}}value={address} onChange={setAddress}/>
-                <Pressable  onPress={()=>navigation.navigate("Stt",{
-                    back:"Setting",
-                    merge:true
-                    })}style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-                    <Image style={{margin:30,flex:1,resizeMode:'center'}}source={require('./assets/mic.png')}/>
-                </Pressable>
-            </View>
-            
-            <Pressable style={{borderRadius:30,margin:50,flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'#ffb0cf'}} title="주소 저장하기" onPress={()=>{addAddress();navigation.navigate("Home")}}>
-                <Text style={{color:'white',fontSize:30}}>주소 저장하기</Text>
-            </Pressable>
-            <Pressable style={{borderRadius:30,margin:50,flex:1,backgroundColor:'#becdff',color:'white',justifyContent:'center',alignItems:'center'}}title="로그아웃" onPress={()=>navigation.navigate("Login")}>
-                <Text style={{color:'white',fontSize:30}}>로그아웃</Text>
-            </Pressable>
-            
-        </View>
-      );
+
+const Settings = ({ route, navigation }) => {
+  const addCollection = firestore().collection('address');
+  const userEmail = useContext(UserContext);
+  const email = userEmail.user.email;
+  const uid = userEmail.user.uid;
+  const [address, setAddress] = React.useState(route.params?.text)
+
+  useEffect(() => {
+    setAddress(route.params?.text)
+  }, [route.params?.text])
+
+  const addAddress = async () => {
+    try {
+      await addCollection.add({
+        email: email,
+        uid: uid,
+        address: address
+      });
+      setAddress('');
+      console.log('Create Complete!');
+      navigation.navigate("Home")
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  return (
+    <View style={{ flex: 1 }}>
+      <Text style={{ fontSize: 40, alignContent: 'center' }}>주소를 입력해주세요</Text>
+      <View style={{ borderRadius: 30, backgroundColor: 'white', flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+        <TextInput style={{ marginTop: 30, flex: 6, }} value={address} onChangeText={setAddress} />
+        <Pressable onPress={() => navigation.navigate("Stt", {
+          back: "Settings",
+          merge: true
+        })} style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <Image style={{ margin: 30, flex: 1, resizeMode: 'center' }} source={require('./assets/mic.png')} />
+        </Pressable>
+      </View>
+
+      <Pressable style={{ borderRadius: 30, margin: 50, flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#ffb0cf' }} title="주소 저장하기" onPress={addAddress}>
+        <Text style={{ color: 'white', fontSize: 30 }}>주소 저장하기</Text>
+      </Pressable>
+      <Pressable style={{ borderRadius: 30, margin: 50, flex: 1, backgroundColor: '#becdff', color: 'white', justifyContent: 'center', alignItems: 'center' }} title="로그아웃" onPress={() => navigation.navigate("Login")}>
+        <Text style={{ color: 'white', fontSize: 30 }}>로그아웃</Text>
+      </Pressable>
+
+    </View>
+  );
 }
 
 export default Settings;
