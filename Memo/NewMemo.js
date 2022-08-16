@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
-import { View, TextInput, Button, Pressable, StyleSheet, Text } from 'react-native';
+import { View, TextInput, Button, Pressable, StyleSheet, Text,Image } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import { UserContext } from "../contexts";
 import { useEffect } from 'react';
 
-const NewMemo = ({ navigation }) => {
+const NewMemo = ({ route,navigation }) => {
   const [title, setTitle] = useState(route.params?.title);
   const [text, setText] = useState(route.params?.text);
   const addCollection = firestore().collection('memo');
@@ -38,9 +38,9 @@ useEffect(()=>{
     <View style={[styles.container]}>
       <View style={[styles.date]}>
         <TextInput style={[styles.title]} value={title} onChangeText={setTitle} placeholder="제목을 입력해주세요" multiline={true} />
-        <Pressable onPress={()=> navigation.navigate("Stt2",{
+        <Pressable style={{flex:1}} onPress={()=> navigation.navigate("Stt2",{
           back:"NewMemo",
-          merge:true,})}/>
+          merge:true,})}><Image style={{flex:3,resizeMode:'contain'}}source={require('./assets/mic.png')}></Image></Pressable>
       </View>
       <View style={[styles.text]}>
         <TextInput value={text} onChangeText={setText} placeholder="내용을 입력해주세요" multiline={true} style={[styles.input]} />
@@ -68,7 +68,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ced4da',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    flexDirection:'row'
 
   },
   text: {

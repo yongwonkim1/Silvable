@@ -35,7 +35,7 @@ LocaleConfig.locales['fr'] = {
 LocaleConfig.defaultLocale = 'fr';
 export default class AgendaScreen extends React.Component<State> {
   state: State = {
-    items: { '2022-08-22': [{ name: 'item 1 - any js object' }] }
+    items: { '2000-01-22': [{ name: 'item 1 - any js object' }] }
   };
   
   render() {

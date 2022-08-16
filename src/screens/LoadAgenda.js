@@ -74,7 +74,6 @@ function LoadAgenda({ navigation }) {
     //   }
     const Load = () => {
         const item = []
-        var name = "name"
         // var items = [[]]
         // getContent.map((content) =>{ 
         //     if( uid == content.uid || getSecondEmail == content.email) 

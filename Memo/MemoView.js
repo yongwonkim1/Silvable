@@ -50,7 +50,7 @@ function MemoView() {
     })
 
   }
-
+ 
   useEffect(() => {
     _callApi();
 
@@ -61,7 +61,6 @@ function MemoView() {
   return (
 
     <View style={{ flex: 1 }}>
-
 
       <ScrollView style={{ flex: 1 }}>
         {

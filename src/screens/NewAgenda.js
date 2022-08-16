@@ -128,7 +128,7 @@ import DatePicker from 'react-native-date-picker'
       });
       setPlan('');
       console.log('Create Complete!');
-      navigation.navigate("Agenda")
+      navigation.navigate("LoadAgenda")
     } catch (error) {
       console.log(error.message);
     }
