@@ -1,20 +1,20 @@
 import React, { useState, useContext } from 'react';
-import { View, TextInput, Button, Pressable, StyleSheet, Text,Image } from 'react-native';
+import { View, TextInput, Button, Pressable, StyleSheet, Text, Image } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import { UserContext } from "../contexts";
 import { useEffect } from 'react';
 
-const NewMemo = ({ route,navigation }) => {
+const NewMemo = ({ route, navigation }) => {
   const [title, setTitle] = useState(route.params?.title);
   const [text, setText] = useState(route.params?.text);
   const addCollection = firestore().collection('memo');
   const userEmail = useContext(UserContext);
   const email = userEmail.user.email;
   const uid = userEmail.user.uid;
-useEffect(()=>{
-  setTitle(route.params?.title);
-  setText(route.params?.text);
-},[route.params?.title])
+  useEffect(() => {
+    setTitle(route.params?.title);
+    setText(route.params?.text);
+  }, [route.params?.title])
   const addText = async () => {
     try {
       await addCollection.add({
@@ -38,9 +38,12 @@ useEffect(()=>{
     <View style={[styles.container]}>
       <View style={[styles.date]}>
         <TextInput style={[styles.title]} value={title} onChangeText={setTitle} placeholder="제목을 입력해주세요" multiline={true} />
-        <Pressable style={{flex:1}} onPress={()=> navigation.navigate("Stt2",{
-          back:"NewMemo",
-          merge:true,})}><Image style={{flex:3,resizeMode:'contain'}}source={require('./assets/mic.png')}></Image></Pressable>
+        <Pressable style={{ flex: 1, alignItems: 'center' }} onPress={() => navigation.navigate("Stt2", {
+          back: "NewMemo",
+          merge: true,
+        })}>
+          <Image style={{ flex: 1, width: '50%', height: '100%', }} source={require('./assets/mic.png')} />
+        </Pressable>
       </View>
       <View style={[styles.text]}>
         <TextInput value={text} onChangeText={setText} placeholder="내용을 입력해주세요" multiline={true} style={[styles.input]} />
@@ -48,12 +51,13 @@ useEffect(()=>{
       <Pressable title="저장" style={[styles.button]} onPress={addText}>
         <Text style={{ color: "white", fontSize: 30 }}>저장하기</Text>
       </Pressable>
-      <View style={{position:'absolute', top:0, left:0, bottom:80, right:10, justifyContent:'flex-end', alignItems:'flex-end'}}>
-        <Pressable onPress={()=>navigation.navigate('Stt',{
-          back:'NewMemo',
-          merge: true,})}>
+      <View style={{ position: 'absolute', top: 0, left: 0, bottom: 80, right: 10, justifyContent: 'flex-end', alignItems: 'flex-end' }}>
+        <Pressable onPress={() => navigation.navigate('Stt', {
+          back: 'NewMemo',
+          merge: true,
+        })}>
           <View style={[styles.new]}>
-            <Image style={{margin:10,flex:1,resizeMode:'contain'}}source={require('./assets/mic.png')}/>
+            <Image style={{ margin: 10, flex: 1, resizeMode: 'contain' }} source={require('./assets/mic.png')} />
           </View>
         </Pressable>
       </View>
@@ -68,9 +72,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ced4da',
     alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection:'row'
+    justifyContent: 'space-between',
+    flexDirection: 'row'
 
+  },
+  title: {
+    flex: 4,
+    fontSize: 20,
+    color: 'black',
   },
   text: {
     flex: 10,
@@ -106,10 +115,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
 
 
-  },
-  title: {
-    fontSize: 20,
-    color: 'black',
   }
 })
 
