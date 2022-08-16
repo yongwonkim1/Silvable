@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { View, StyleSheet, Text, Platform, PermissionsAndroid, ScrollView, Dimensions, TextInput, Pressable, Linking, Image, } from "react-native";
+import { View, StyleSheet, Text, Platform, PermissionsAndroid, ScrollView, Dimensions, TextInput, Pressable, Linking, Image, Button, } from "react-native";
 
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import Geolocation from 'react-native-geolocation-service';
@@ -114,8 +114,8 @@ export default function MapToHome({ navigation }) {
     return (
         <>
             <View style={{ flex: 1 }}>
-                <View style={{ flex: 1.5, alignItems: 'center', backgroundColor: 'white' }}>
-                    <Text style={{ flex: 1, color: 'black', justifyContent: 'center', fontSize: 20 }}>집 주소를 입력해주세요.</Text>
+                <View style={{ flex: 1.5, flexDirection: "row", alignItems: 'center', backgroundColor: 'white' }}>
+                    <Text style={{ flex: 0.5, color: 'black', justifyContent: 'center', fontSize: 20 }}>집 주소: </Text>
                     <TextInput style={styles.input}
                         returnKeyType="done"
                         value={goto}
@@ -124,6 +124,7 @@ export default function MapToHome({ navigation }) {
                         }
                         onSubmitEditing={getGeoCode}
                     />
+                    <Button title="경로탐색" onPress={getGeoCode} />
                 </View>
                 {location ? (
                     <View style={{ flex: 10 }}>
