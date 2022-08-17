@@ -1,5 +1,4 @@
-
-import React, { Fragment, Component, useState } from 'react';
+import React, { Fragment, Component, useState, useContext, useEffect } from 'react';
 import {
   Pressable,
   StyleSheet,
@@ -8,13 +7,69 @@ import {
   View,
   Linking
 } from 'react-native';
+import { UserContext } from '../../contexts';
 import Tts from "react-native-tts";
+import firestore from '@react-native-firebase/firestore';
 const Home = ({ navigation }) => {
   const [letter, setLetter] = useState("");
   onPressRead = () => {
     Tts.stop();
     Tts.speak(letter);
   };
+  /* 여기부터 일정관리때매 ㅎㅎ */
+
+  const userEmail = useContext(UserContext);
+  const email = userEmail.user.email;
+  const uid = userEmail.user.uid;
+  const [result, setResult] = useState([]);
+  const [getSecondEmail, setGetSecondEmail] = useState("");
+
+  const _callApi = async () => {
+    try {
+      const docRef = await firestore().collection('plan').orderBy("date", "desc").get();
+
+      const data = docRef.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id
+      }))
+
+      const item = [];
+      data.map((doc) => {
+        if (uid == doc.uid || getSecondEmail == doc.email) {
+          item.push(doc.date)
+          item.push(doc.text)
+        }
+      })
+      console.log(item);
+      setResult(item);
+      console.log(result);
+    } catch (error) {
+
+    }
+  };
+
+  const getUserDoc = async () => {
+
+    const docRef = await firestore().collection('users').get();
+
+    const data = docRef.docs.map(doc => ({
+      ...doc.data(),
+      id: doc.id
+    }))
+
+    data.map((doc) => {
+      if (doc.creatorId == uid) {
+        setGetSecondEmail(doc.secondId);
+      }
+    })
+
+  }
+
+  useEffect(() => {
+    _callApi();
+    getUserDoc();
+  }, [])
+  /*여기까지 일정관리떄매 ㅎㅎ */
 
   return (
     <View style={[styles.container]}>
@@ -71,7 +126,9 @@ const Home = ({ navigation }) => {
           <Text style={[styles.eleText]}>정보 수정</Text>
         </Pressable>
         <Pressable style={[styles.element, { flex: 2, backgroundColor: 'white' }]}
-          onPress={() => navigation.navigate('LoadAgenda')}
+          onPress={() => navigation.navigate('Agenda', {
+            result
+          })}
           onLongPress={() => {
             setLetter("일정 관리");
             onPressRead()
@@ -170,6 +227,3 @@ const styles = StyleSheet.create({
 );
 
 export default Home;
-
-
-

@@ -28,7 +28,6 @@ import NewAgenda from './src/screens/NewAgenda';
 import MemoView from './Memo/MemoView';
 import MemoDetail from './Memo/MemoDetail';
 import Settings from './src/screens/Settings';
-import LoadAgenda from './src/screens/LoadAgenda';
 
 const Stack = createStackNavigator();
 
@@ -62,7 +61,6 @@ export default function App() {
             <Stack.Screen name="EditAgenda" component={EditAgenda} options={{ title: '일정 변경' }} />
             <Stack.Screen name="MemoDetail" component={MemoDetail} options={{ title: '자세한 메모' }} />
             <Stack.Screen name="Settings" component={Settings} options={{ title: '설정' }} />
-            <Stack.Screen name="LoadAgenda" component={LoadAgenda} options={{ title: '일정 불러오기' }} />
           </Stack.Navigator>
         </NavigationContainer>
       </ThemeProvider>
