@@ -70,8 +70,13 @@ const MemoDetail = ({ route, navigation }) => {
         <TextInput style={styles.title} value={title} onChangeText={setTitle} multiline />
         <TextInput style={styles.text} value={text} onChangeText={setText} multiline />
         {isOwner ? <View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 1 }}>
-          <Button style={styles.editBtn} onPress={UpdateDB} title="수정" />
-          <Button style={styles.removeBtn} onPress={alertDelete} title="삭제" />
+          <Pressable style={{ ...styles.editBtn, backgroundColor: '#6487ee' }} onPress={UpdateDB}>
+            <Text style={{ fontSize: 30, fontWeight: '800', color: 'black' }}>수정</Text>
+          </Pressable>
+          <Pressable style={{ ...styles.editBtn, backgroundColor: '#ff6666' }} onPress={alertDelete}>
+            <Text style={{ fontSize: 30, fontWeight: '800', color: 'black' }}>삭제</Text>
+
+          </Pressable>
         </View> : null}
       </View>
       <View style={{ height: 100, bottom: 0 }}>
@@ -137,15 +142,15 @@ const styles = StyleSheet.create({
     color: 'black',
     backgroundColor: 'white',
     borderRadius: 20,
-
   },
   editBtn: {
     flex: 1,
-    fontSize: 500,
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 10,
+    borderRadius: 10,
   },
-  removeBtn: {
-    flex: 1,
-  },
+
   bottomTap: {
     flex: 1,
     flexDirection: 'row',
