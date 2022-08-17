@@ -133,9 +133,9 @@ const Settings = ({ route, navigation }) => {
 
   return (
     <View style={{ flex: 1 }}>
-      <Text style={{ fontSize: 40, alignContent: 'center' }}>주소를 입력해주세요</Text>
+      <Text style={{ fontSize: 40, alignContent: 'center', color: 'black' }}>주소를 입력해주세요</Text>
       <View style={{ borderRadius: 30, backgroundColor: 'white', flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-        <TextInput style={{ marginTop: 30, flex: 6, }} value={address} onChangeText={setAddress} />
+        <TextInput style={{ marginTop: 30, flex: 6, color: 'black' }} value={address} onChangeText={setAddress} />
         <Pressable onPress={() => navigation.navigate("Stt", {
           back: "Settings",
           merge: true
@@ -144,10 +144,10 @@ const Settings = ({ route, navigation }) => {
         </Pressable>
       </View>
 
-      <Pressable style={{ borderRadius: 30, margin: 50, flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#ffb0cf' }} title="주소 저장하기" onPress={addAddress}>
+      <Pressable style={{ borderRadius: 30, margin: 30, flex: 1.5, justifyContent: 'center', alignItems: 'center', backgroundColor: '#ffb0cf' }} title="주소 저장하기" onPress={addAddress}>
         <Text style={{ color: 'white', fontSize: 30 }}>주소 저장하기</Text>
       </Pressable>
-      <Pressable style={{ borderRadius: 30, margin: 50, flex: 1, backgroundColor: '#becdff', color: 'white', justifyContent: 'center', alignItems: 'center' }} title="로그아웃" onPress={() => navigation.navigate("Login")}>
+      <Pressable style={{ borderRadius: 30, margin: 30, flex: 1.5, backgroundColor: '#becdff', color: 'white', justifyContent: 'center', alignItems: 'center' }} title="로그아웃" onPress={() => navigation.navigate("Login")}>
         <Text style={{ color: 'white', fontSize: 30 }}>로그아웃</Text>
       </Pressable>
 
