@@ -1,12 +1,18 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Pressable, TextInput, Alert, Image } from 'react-native';
+import { StyleSheet, Text, View, Linking, Pressable, TextInput, Alert, Image } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import { UserContext } from "../contexts";
 import { userCollection } from '../lib/user';
 import { useNavigation } from '@react-navigation/native';
 import { async } from '@firebase/util';
+import Tts from "react-native-tts";
 
 const MemoDetail = ({ route, navigation }) => {
+  const [letter, setLetter] = useState("");
+  onPressRead = () => {
+    Tts.stop();
+    Tts.speak(letter);
+  };
   const userEmail = useContext(UserContext);
   const email = userEmail.user.email;
   const uid = userEmail.user.uid;
@@ -79,7 +85,7 @@ const MemoDetail = ({ route, navigation }) => {
           </Pressable>
         </View> : null}
       </View>
-      <View style={{ height: 100, bottom: 0 }}>
+      <View style={{ height: 80, bottom: 0 }}>
         <View style={[styles.bottomTap]}>
           <Pressable
             onPress={() => {
@@ -158,7 +164,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     borderTopColor: 'black',
     backgroundColor: 'white',
-    marginTop: 20
   },
   btImg: {
     height: 50,

@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Linking, Pressable, Image } from 'react-native';
 import { Camera, CameraType } from 'expo-camera';
+import Tts from "react-native-tts";
 
-const Magnify=() => {
+const Magnify = ({ navigation }) => {
+  const [letter, setLetter] = useState("");
+  onPressRead = () => {
+    Tts.stop();
+    Tts.speak(letter);
+  };
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(CameraType.back);
 
@@ -28,10 +34,47 @@ const Magnify=() => {
             onPress={() => {
               setType(type === CameraType.back ? CameraType.front : CameraType.back);
             }}>
-            <Text style={styles.text}> Flip </Text>
+            <Text style={styles.text}>회전</Text>
           </TouchableOpacity>
         </View>
       </Camera>
+      <View style={{ height: 80 }}>
+        <View style={[styles.bottomTap]}>
+          <Pressable
+            onPress={() => {
+              navigation.pop();
+            }}
+            onLongPress={() => {
+              setLetter("뒤로가기");
+              onPressRead()
+            }}>
+            <Image style={[styles.btImg]} source={require('./assets/뒤로가기.jpg')} />
+          </Pressable >
+          <Pressable
+            onPress={() => {
+              navigation.popToTop();
+            }}
+            onLongPress={() => {
+              setLetter("홈");
+              onPressRead()
+            }}>
+            <Image style={[styles.btImg]} source={require('./assets/홈.png')} />
+          </Pressable>
+          <Pressable onLongPress={() => {
+            setLetter("119");
+            onPressRead()
+            { Linking.openURL(`tel:119`) }
+          }}>
+            <Image style={[styles.btImg]} source={require('./assets/119.png')} />
+          </Pressable>
+          <Pressable onLongPress={() => {
+            setLetter("돋보기");
+            onPressRead()
+          }} onPress={() => navigation.navigate("Magnify")}>
+            <Image style={[styles.btImg]} source={require('./assets/돋보기.png')} />
+          </Pressable>
+        </View>
+      </View>
     </View>
   );
 }
@@ -58,5 +101,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'white',
   },
+  bottomTap: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    borderTopColor: 'black',
+    backgroundColor: 'white',
+  },
+  btImg: {
+    height: 50,
+    width: 50
+  }
 });
 export default Magnify;

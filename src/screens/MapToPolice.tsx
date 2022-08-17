@@ -174,7 +174,7 @@ export default function MapToPolice({ navigation }) {
                     </ScrollView>
                 )
                 }
-                <View style={{ height: 100 }}>
+                <View style={{ height: 80 }}>
                     <View style={[styles.bottomTap]}>
                         <Pressable
                             onPress={() => {
@@ -232,7 +232,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         borderTopColor: 'black',
         backgroundColor: 'white',
-        marginTop: 20
     },
     btImg: {
         height: 50,

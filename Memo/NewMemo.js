@@ -1,10 +1,16 @@
 import React, { useState, useContext } from 'react';
-import { View, TextInput, Button, Pressable, StyleSheet, Text, Image } from 'react-native';
+import { View, TextInput, Button, Pressable, StyleSheet, Text, Image, Linking } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import { UserContext } from "../contexts";
 import { useEffect } from 'react';
+import Tts from "react-native-tts";
 
 const NewMemo = ({ route, navigation }) => {
+  const [letter, setLetter] = useState("");
+  onPressRead = () => {
+    Tts.stop();
+    Tts.speak(letter);
+  };
   const [title, setTitle] = useState(route.params?.title);
   const [text, setText] = useState(route.params?.text);
   const addCollection = firestore().collection('memo');
@@ -61,6 +67,43 @@ const NewMemo = ({ route, navigation }) => {
           </View>
         </Pressable>
       </View>
+      <View style={{ height: 80, bottom: 0 }}>
+        <View style={[styles.bottomTap]}>
+          <Pressable
+            onPress={() => {
+              navigation.pop();
+            }}
+            onLongPress={() => {
+              setLetter("뒤로가기");
+              onPressRead()
+            }}>
+            <Image style={[styles.btImg]} source={require('./assets/뒤로가기.jpg')} />
+          </Pressable >
+          <Pressable
+            onPress={() => {
+              navigation.popToTop();
+            }}
+            onLongPress={() => {
+              setLetter("홈");
+              onPressRead()
+            }}>
+            <Image style={[styles.btImg]} source={require('./assets/홈.png')} />
+          </Pressable>
+          <Pressable onLongPress={() => {
+            setLetter("119");
+            onPressRead()
+            { Linking.openURL(`tel:119`) }
+          }}>
+            <Image style={[styles.btImg]} source={require('./assets/119.png')} />
+          </Pressable>
+          <Pressable onLongPress={() => {
+            setLetter("돋보기");
+            onPressRead()
+          }} onPress={() => navigation.navigate("Magnify")}>
+            <Image style={[styles.btImg]} source={require('./assets/돋보기.png')} />
+          </Pressable>
+        </View>
+      </View>
     </View>
   );
 };
@@ -115,6 +158,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
 
 
+  },
+  bottomTap: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    borderTopColor: 'black',
+    backgroundColor: 'white',
+  },
+  btImg: {
+    height: 50,
+    width: 50
   }
 })
 

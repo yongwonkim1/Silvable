@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState, useContext } from 'react';
-import { Alert, StyleSheet, Text, View, TouchableOpacity, Pressable, Button,Image } from 'react-native';
+import { Alert, StyleSheet, Text, View, TouchableOpacity, Pressable, Linking, Image, Dimensions } from 'react-native';
 import { Agenda, DateData, AgendaEntry, AgendaSchedule, LocaleConfig } from 'react-native-calendars';
 import testIDs from './testIDs';
 import { UserContext } from '../../contexts';
@@ -10,6 +10,7 @@ interface State {
   items?: AgendaSchedule;
   result: string[];
 }
+const winWidth = Dimensions.get('window').width;
 
 LocaleConfig.locales['ko'] = {
   monthNames: [
@@ -27,7 +28,7 @@ LocaleConfig.locales['ko'] = {
     '12월',
   ],
   monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-  dayNames: ['일요일','월요일', '화요일', '수요일', '목요일', '금요일', '토요일',],
+  dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일',],
   dayNamesShort: ['일', '월', '화', '수', '목', '금', '토',],
   today: "오늘"
 
@@ -37,7 +38,7 @@ export default class AgendaScreen extends React.Component<State> {
   state: State = {
     items: { '2000-01-22': [{ name: 'item 1 - any js object' }] }
   };
-  
+
   render() {
 
     this.state.result = this.props.route.params.result
@@ -76,9 +77,46 @@ export default class AgendaScreen extends React.Component<State> {
           params: { text: "" },
         })}>
           <View style={[styles.new]}>
-            <Image style={{margin:10,resizeMode:'contain',flex:1}}source={require('./assets/plus.png')}/>
+            <Image style={{ margin: 10, resizeMode: 'contain', flex: 1 }} source={require('./assets/plus.png')} />
           </View>
         </Pressable>
+        <View style={{ height: 100, width: winWidth, bottom: 0 }}>
+          <View style={[styles.bottomTap]}>
+            <Pressable
+              onPress={() => {
+                this.props.navigation.pop();
+              }}
+              onLongPress={() => {
+                setLetter("뒤로가기");
+                onPressRead()
+              }}>
+              <Image style={[styles.btImg]} source={require('./assets/뒤로가기.jpg')} />
+            </Pressable >
+            <Pressable
+              onPress={() => {
+                this.props.navigation.popToTop();
+              }}
+              onLongPress={() => {
+                setLetter("홈");
+                onPressRead()
+              }}>
+              <Image style={[styles.btImg]} source={require('./assets/홈.png')} />
+            </Pressable>
+            <Pressable onLongPress={() => {
+              setLetter("119");
+              onPressRead()
+              { Linking.openURL(`tel:119`) }
+            }}>
+              <Image style={[styles.btImg]} source={require('./assets/119.png')} />
+            </Pressable>
+            <Pressable onLongPress={() => {
+              setLetter("돋보기");
+              onPressRead()
+            }} onPress={() => this.props.navigation.navigate("Magnify")}>
+              <Image style={[styles.btImg]} source={require('./assets/돋보기.png')} />
+            </Pressable>
+          </View>
+        </View>
       </View>
     </>
     );
@@ -97,16 +135,16 @@ export default class AgendaScreen extends React.Component<State> {
           items[strTime] = [];
         }
         for (let j = 0; j < result.length; j = j + 2) {
-          if (items[strTime].length==0&&(strTime) == result[j]) {
+          if (items[strTime].length == 0 && (strTime) == result[j]) {
             console.log(strTime)
-              items[strTime].push({
-                name: result[j + 1],
-                height: 30,
-                day: strTime
-              })
-              break
-            }
+            items[strTime].push({
+              name: result[j + 1],
+              height: 30,
+              day: strTime
+            })
+            break
           }
+        }
 
 
         //   items[result[j]] = ({
@@ -202,5 +240,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
 
 
+  },
+  bottomTap: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    borderTopColor: 'black',
+    backgroundColor: 'white',
+    marginTop: 20
+  },
+  btImg: {
+    height: 50,
+    width: 50
   }
 });
