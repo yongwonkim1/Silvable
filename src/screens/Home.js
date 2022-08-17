@@ -83,9 +83,6 @@ const Home = ({ navigation }) => {
       <View style={{ height: 100 }}>
         <View style={[styles.bottomTap]}>
           <Pressable
-            onPress={() => {
-              navigation.pop();
-            }}
             onLongPress={() => {
               setLetter("뒤로가기");
               onPressRead()
@@ -93,9 +90,6 @@ const Home = ({ navigation }) => {
             <Image style={[styles.btImg]} source={require('./assets/뒤로가기.jpg')} />
           </Pressable >
           <Pressable
-            onPress={() => {
-              navigation.popToTop();
-            }}
             onLongPress={() => {
               setLetter("홈");
               onPressRead()
@@ -148,14 +142,15 @@ const styles = StyleSheet.create({
     elevation: 10,  // 안드로이드용 그림자
   },
   eleImg: {
-    height: 50,
-    width: 50,
-    marginBottom: 15,
-    marginTop: 10
+    flex: 1,
+    width: '50%',
+    resizeMode: "stretch"
   },
   eleText: {
-    fontSize: 30,
-    color: 'black'
+    flex: 1,
+    fontSize: 25,
+    color: 'black',
+    marginTop: 10,
   },
   bottomTap: {
     flex: 1,
