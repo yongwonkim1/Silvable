@@ -83,7 +83,7 @@ const Home = ({ navigation }) => {
             setLetter("집으로 안내");
             onPressRead()
           }}>
-          <Image style={[styles.eleImg]} source={require('./assets/집.png')}></Image>
+          <Image style={[styles.eleImg]} source={require('./assets/toHome.png')}></Image>
           <Text style={[styles.eleText]}>집으로 안내</Text>
         </Pressable>
         <Pressable style={[styles.element, { flex: 2, backgroundColor: 'white' }]}
@@ -92,7 +92,7 @@ const Home = ({ navigation }) => {
             setLetter("병원 안내");
             onPressRead()
           }}>
-          <Image style={[styles.eleImg]} source={require('./assets/병원.png')}></Image>
+          <Image style={[styles.eleImg]} source={require('./assets/hospital.png')}></Image>
           <Text style={[styles.eleText]}>병원 안내</Text>
         </Pressable>
       </View>
@@ -103,7 +103,7 @@ const Home = ({ navigation }) => {
             setLetter("경찰서 안내");
             onPressRead()
           }}>
-          <Image style={[styles.eleImg]} source={require('./assets/경찰.png')}></Image>
+          <Image style={[styles.eleImg]} source={require('./assets/police.png')}></Image>
           <Text style={[styles.eleText]}>경찰서 안내</Text>
         </Pressable>
         <Pressable style={[styles.element, { flex: 2, backgroundColor: '#ffcad5' }]} onPress={() => navigation.navigate('MemoView')}
@@ -111,7 +111,7 @@ const Home = ({ navigation }) => {
             setLetter("메모장");
             onPressRead()
           }}>
-          <Image style={[styles.eleImg]} source={require('./assets/메모장.png')}></Image>
+          <Image style={[styles.eleImg]} source={require('./assets/memo.png')}></Image>
           <Text style={[styles.eleText]}>메모장</Text>
         </Pressable>
       </View>
@@ -122,7 +122,7 @@ const Home = ({ navigation }) => {
             setLetter("정보수정");
             onPressRead()
           }}>
-          <Image style={[styles.eleImg]} source={require('./assets/정보수정.png')}></Image>
+          <Image style={[styles.eleImg]} source={require('./assets/setting.png')}></Image>
           <Text style={[styles.eleText]}>정보 수정</Text>
         </Pressable>
         <Pressable style={[styles.element, { flex: 2, backgroundColor: 'white' }]}
@@ -133,7 +133,7 @@ const Home = ({ navigation }) => {
             setLetter("일정 관리");
             onPressRead()
           }}>
-          <Image style={[styles.eleImg]} source={require('./assets/달력.png')}></Image>
+          <Image style={[styles.eleImg]} source={require('./assets/celender.png')}></Image>
           <Text style={[styles.eleText]}>일정 관리</Text>
         </Pressable>
       </View>
@@ -144,14 +144,14 @@ const Home = ({ navigation }) => {
               setLetter("뒤로가기");
               onPressRead()
             }}>
-            <Image style={[styles.btImg]} source={require('./assets/뒤로가기.jpg')} />
+            <Image style={[styles.btImg]} source={require('./assets/back.jpg')} />
           </Pressable >
           <Pressable
             onLongPress={() => {
               setLetter("홈");
               onPressRead()
             }}>
-            <Image style={[styles.btImg]} source={require('./assets/홈.png')} />
+            <Image style={[styles.btImg]} source={require('./assets/home.png')} />
           </Pressable>
           <Pressable onLongPress={() => {
             setLetter("119");
@@ -164,7 +164,7 @@ const Home = ({ navigation }) => {
             setLetter("돋보기");
             onPressRead()
           }} onPress={() => navigation.navigate("Magnify")}>
-            <Image style={[styles.btImg]} source={require('./assets/돋보기.png')} />
+            <Image style={[styles.btImg]} source={require('./assets/mag.png')} />
           </Pressable>
         </View>
       </View>

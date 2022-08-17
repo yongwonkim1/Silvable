@@ -36,7 +36,7 @@ export default function Hospital({ navigation }) {
                     <View style={styles.imageCase}>
                         <Image
                             style={styles.image}
-                            source={require('./assets/hospitalImages/정형외과.png')}
+                            source={require('./assets/hospitalImages/1.png')}
                         />
                     </View>
                 </Pressable>
@@ -52,7 +52,7 @@ export default function Hospital({ navigation }) {
                     <View style={styles.imageCase}>
                         <Image
                             style={styles.image}
-                            source={require('./assets/hospitalImages/안과.png')}
+                            source={require('./assets/hospitalImages/2.png')}
                         />
                     </View>
                 </Pressable>
@@ -70,7 +70,7 @@ export default function Hospital({ navigation }) {
                     <View style={styles.imageCase}>
                         <Image
                             style={styles.image}
-                            source={require('./assets/hospitalImages/이비인후과.png')}
+                            source={require('./assets/hospitalImages/3.png')}
                         />
                     </View>
                 </Pressable>
@@ -87,7 +87,7 @@ export default function Hospital({ navigation }) {
                     <View style={styles.imageCase}>
                         <Image
                             style={styles.image}
-                            source={require('./assets/hospitalImages/정신과.png')}
+                            source={require('./assets/hospitalImages/4.png')}
                         />
                     </View>
                 </Pressable>
@@ -105,7 +105,7 @@ export default function Hospital({ navigation }) {
                     <View style={styles.imageCase}>
                         <Image
                             style={styles.image}
-                            source={require('./assets/hospitalImages/치과.png')}
+                            source={require('./assets/hospitalImages/5.png')}
                         />
                     </View>
                 </Pressable>
@@ -121,7 +121,7 @@ export default function Hospital({ navigation }) {
                     <View style={styles.imageCase}>
                         <Image
                             style={styles.image}
-                            source={require('./assets/hospitalImages/성형외과.png')}
+                            source={require('./assets/hospitalImages/6.png')}
                         />
                     </View>
                 </Pressable>
@@ -136,7 +136,7 @@ export default function Hospital({ navigation }) {
                             setLetter("뒤로가기");
                             onPressRead()
                         }}>
-                        <Image style={[styles.btImg]} source={require('./assets/뒤로가기.jpg')} />
+                        <Image style={[styles.btImg]} source={require('./assets/back.jpg')} />
                     </Pressable >
                     <Pressable
                         onPress={() => {
@@ -146,7 +146,7 @@ export default function Hospital({ navigation }) {
                             setLetter("홈");
                             onPressRead()
                         }}>
-                        <Image style={[styles.btImg]} source={require('./assets/홈.png')} />
+                        <Image style={[styles.btImg]} source={require('./assets/home.png')} />
                     </Pressable>
                     <Pressable onLongPress={() => {
                         setLetter("119");
@@ -159,7 +159,7 @@ export default function Hospital({ navigation }) {
                         setLetter("돋보기");
                         onPressRead()
                     }} onPress={() => navigation.navigate("Magnify")}>
-                        <Image style={[styles.btImg]} source={require('./assets/돋보기.png')} />
+                        <Image style={[styles.btImg]} source={require('./assets/mag.png')} />
                     </Pressable>
                 </View>
             </View>

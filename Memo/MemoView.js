@@ -113,7 +113,7 @@ function MemoView() {
               setLetter("뒤로가기");
               onPressRead()
             }}>
-            <Image style={[styles.btImg]} source={require('./assets/뒤로가기.jpg')} />
+            <Image style={[styles.btImg]} source={require('./assets/back.jpg')} />
           </Pressable >
           <Pressable
             onPress={() => {
@@ -123,7 +123,7 @@ function MemoView() {
               setLetter("홈");
               onPressRead()
             }}>
-            <Image style={[styles.btImg]} source={require('./assets/홈.png')} />
+            <Image style={[styles.btImg]} source={require('./assets/home.png')} />
           </Pressable>
           <Pressable onLongPress={() => {
             setLetter("119");
@@ -136,7 +136,7 @@ function MemoView() {
             setLetter("돋보기");
             onPressRead()
           }} onPress={() => navigation.navigate("Magnify")}>
-            <Image style={[styles.btImg]} source={require('./assets/돋보기.png')} />
+            <Image style={[styles.btImg]} source={require('./assets/mag.png')} />
           </Pressable>
         </View>
       </View>
