@@ -1,10 +1,11 @@
 const colors = {
-    white : '#ffffff',
-    black : '#000000',
-    grey_0 : '#d5d5d5',
-    grey_1 : '#a6a6a6', 
-    red : '#e84118',
+    white: '#ffffff',
+    black: '#000000',
+    grey_0: '#d5d5d5',
+    grey_1: '#a6a6a6',
+    red: '#e84118',
     lightgreen: '#b5e61d',
+    pink: '#f8bbd0'
 };
 
 export const theme = {
@@ -18,10 +19,10 @@ export const theme = {
     profile_imageButtonBackground: colors.grey_1, //프로필 사용자 이미지 추가하는 버튼 배경
     profile_imageButtonIcon: colors.white,
 
-    buttonBackground: colors.lightgreen, //버튼 배경 그린라이트 로고와 통일
+    buttonBackground: colors.pink, //버튼 배경 그린라이트 로고와 통일
     buttonTitle: colors.white,
-    bottuonUnFilledTitle: colors.lightgreen, //통일
+    bottuonUnFilledTitle: colors.pink, //통일
 
-    texttest:"hello",
+    texttest: "hello",
 };
 
