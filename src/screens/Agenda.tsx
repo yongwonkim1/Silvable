@@ -5,6 +5,7 @@ import testIDs from './testIDs';
 import { UserContext } from '../../contexts';
 import firestore from '@react-native-firebase/firestore'
 import { connectFirestoreEmulator } from 'firebase/firestore';
+import Tts from "react-native-tts";
 
 interface State {
   items?: AgendaSchedule;
@@ -38,9 +39,7 @@ export default class AgendaScreen extends React.Component<State> {
   state: State = {
     items: { '2000-01-22': [{ name: 'item 1 - any js object' }] }
   };
-
   render() {
-
     this.state.result = this.props.route.params.result
     console.log(this.state.result)
     return (<>
@@ -185,7 +184,7 @@ export default class AgendaScreen extends React.Component<State> {
     const color = isFirst ? 'black' : '#43515c';
 
     return (
-      <TouchableOpacity
+      <Pressable
         testID={testIDs.agenda.ITEM}
         style={[styles.item, { height: reservation.height }]}
         onPress={() => this.props.navigation.navigate({
@@ -194,7 +193,7 @@ export default class AgendaScreen extends React.Component<State> {
         })}
       >
         <Text style={{ fontSize, color }}>{reservation.name}</Text>
-      </TouchableOpacity>
+      </Pressable>
     );
   }
 

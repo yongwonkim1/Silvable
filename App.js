@@ -32,6 +32,7 @@ import Settings from './src/screens/Settings';
 const Stack = createStackNavigator();
 
 export default function App() {
+  console.disableYellowBox = true; 
   return (
 
     <UserProvider>

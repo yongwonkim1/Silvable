@@ -106,6 +106,7 @@ const Login = ({ navigation }) => {
       Alert.alert("로그인에 실패하였습니다.");
     }
   }
+  console.disableYellowBox = true; 
   //, params: { email, password } 
   //키보드 감추기를 위한 keyboardawarescrollview 라이브러리 => 입력 도중 다른 영역을 터지 하면 키보드 사라지고, 스크롤 이동되는 것 가능
   return (

@@ -73,12 +73,16 @@ function MemoView() {
         <React.StrictMode>{
           getContent.map((content) => uid == content.uid || getSecondEmail == content.email ? (
             <>
-              <View style={styles.memoContainer}>
-                <View style={{ flex: 4, paddingRight: 10, borderRightWidth: 1, borderRightColor: '#999999' }} >
+              <View style={styles.memoContainer} >
+                <Pressable 
+                onLongPress={() => {
+                  setLetter(content.title);
+                  onPressRead()
+                }} style={{ flex: 4, paddingRight: 10, borderRightWidth: 1, borderRightColor: '#999999' }} >
                   <Text style={{ fontSize: 50, color: 'black' }} numberOfLines={1}>{content.title}</Text>
                   <Text style={{ fontSize: 30, color: '#555555' }} numberOfLines={1}>{content.text}</Text>
                   <Text style={{ fontSize: 15, color: '#555555' }} numberOfLines={1}>{content.email}</Text>
-                </View>
+                </Pressable>
                 <View style={{ flex: 1, paddingLeft: 10, marginTop: 20 }}>
                   <Pressable
                     style={{ flex: 1 }}

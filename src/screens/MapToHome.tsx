@@ -26,7 +26,7 @@ export default function MapToHome({ navigation }) {
         Tts.stop();
         Tts.speak(letter);
     };
-
+    console.disableYellowBox = true; 
     const [location, setLocation] = useState<ILocation | undefined>(undefined);  // 현재위치
     const [destination, setDestination] = useState({ latitude: 38, longitude: 128 });  // 도착지 위치(경찰서)
     const [goto, setGoto] = useState('');  // 추후 DB에 저장된 주소로 사용
