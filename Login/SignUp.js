@@ -103,10 +103,11 @@ const SignUp = () => {
     try {
       const { user } = await signUp(info);
       console.log(user);
+      if(email2==null)email2=""
       navigation.navigate("Login")
       await firestore().collection("users").add({
         signupCreatedAt: Date.now(),
-        creatorId: user.uid,
+        creatorId: email,
         secondId: email2,
       })
     } catch (e) {
@@ -160,7 +161,6 @@ const SignUp = () => {
 
         <Button title="Signup"
           onPress={signUpSubmit}
-          disabled={disabled}
         />
       </Container>
     </KeyboardAwareScrollView>
