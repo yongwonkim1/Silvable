@@ -20,7 +20,7 @@ const NewMemo = ({ route, navigation }) => {
   useEffect(() => {
     setTitle(route.params?.title);
     setText(route.params?.text);
-  }, [route.params?.title])
+  }, [route.params?.title,route.params?.text])
   const addText = async () => {
     try {
       await addCollection.add({
